@@ -42,7 +42,7 @@ const x = preval`module.exports = 1`;
 const x = 1;
 ```
 
-Or, more interestinglly:
+Or, more interestingly:
 
 ```javascript
 const x = preval`

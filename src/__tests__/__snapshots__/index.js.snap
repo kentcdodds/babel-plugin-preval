@@ -1,45 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`2. preval 1`] = `
-"
+
 const x = preval\`module.exports = 1\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = 1;
-"
+
 `;
 
 exports[`3. preval 1`] = `
-"
-preval\`module.exports = \\"foo\\"\`
+
+preval\`module.exports = "foo"\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-\\"foo\\";
-"
+"foo";
+
 `;
 
 exports[`4. preval 1`] = `
-"
+
 const y = preval\`
   module.exports = {
     booyah: function() {
-      return \\"booyah\\"
+      return "booyah"
     }
   }
 \`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const y = { \\"booyah\\": function booyah() {
-    return \\"booyah\\";
+const y = { "booyah": function booyah() {
+    return "booyah";
   } };
-"
+
 `;
 
 exports[`5. preval 1`] = `
-"
+
 const x = preval\`
   const fs = require('fs')
   const val = fs.readFileSync(require.resolve('./fixture1.md'), 'utf8')
@@ -53,14 +53,14 @@ const x = preval\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = { \\"val\\": \\"# fixture\\\\n\\\\nThis is some file thing...\\\\n\\", \\"getSplit\\": function getSplit(splitDelimiter) {
+const x = { "val": "# fixture\\n\\nThis is some file thing...\\n", "getSplit": function getSplit(splitDelimiter) {
     return x.val.split(splitDelimiter);
   } };
-"
+
 `;
 
 exports[`6. preval 1`] = `
-"
+
 export default preval\`
   import path from 'path'
   export default path.join(__dirname, 'something/whatever.js').replace(__dirname, '')
@@ -68,96 +68,136 @@ export default preval\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-export default { \\"default\\": \\"/something/whatever.js\\" };
-"
+export default { "default": "/something/whatever.js" };
+
 `;
 
 exports[`7. preval 1`] = `
-"
-const x = preval\`module.exports = \\"\${dynamic}\\"\`
+
+const x = preval\`module.exports = "\${dynamic}"\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 Error: unknown: Unable to determine the value of your preval string
-"
+
 `;
 
 exports[`8. preval 1`] = `
-"
-import x from /* preval */ \\"./fixtures/compute-one.js\\"
+
+import x from /* preval */ "./fixtures/compute-one.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = 1;
-"
+
 `;
 
 exports[`9. preval 1`] = `
-"
-import x from /* preval */ \\"./fixtures/compute-one.js\\"
+
+import x from /* preval */ "./fixtures/compute-one.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = 1;
-"
+
 `;
 
 exports[`10. preval 1`] = `
-"
-import x from /* preval */ /* this is extra stuff */ \\"./fixtures/compute-one.js\\"
+
+import x from /* preval */ /* this is extra stuff */ "./fixtures/compute-one.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = 1;
-"
+
 `;
 
 exports[`11. preval 1`] = `
-"
-import x from /* this is extra stuff */ /* preval */ \\"./fixtures/compute-one.js\\"
+
+import x from /* this is extra stuff */ /* preval */ "./fixtures/compute-one.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = 1;
-"
+
 `;
 
 exports[`13. preval 1`] = `
-"
-import x from /* preval(\\"string argument\\") */ \\"./fixtures/identity.js\\"
+
+import x from /* preval("string argument") */ "./fixtures/identity.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = \\"string argument\\";
-"
+const x = "string argument";
+
 `;
 
 exports[`14. preval 1`] = `
-"
-import x from /* preval({object: \\"argument\\", withFunction: () => {}}) */ \\"./fixtures/identity.js\\"
+
+import x from /* preval({object: "argument", withFunction: () => {}}) */ "./fixtures/identity.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = { \\"object\\": \\"argument\\", \\"withFunction\\": function withFunction() {} };
-"
+const x = { "object": "argument", "withFunction": function withFunction() {} };
+
 `;
 
 exports[`15. preval 1`] = `
-"
-import x from /* preval(require(\\"./fixtures/compute-one.js\\")) */ \\"./fixtures/identity.js\\"
+
+import x from /* preval(require("./fixtures/compute-one")) */ "./fixtures/identity"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = 1;
-"
+
 `;
 
 exports[`16. preval 1`] = `
-"
-import x from /* preval(require(\\"./fixtures/es6.js\\").default) */ \\"./fixtures/es6-identity.js\\"
+
+import x from /* preval(require("./fixtures/es6").default) */ "./fixtures/es6-identity"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = \\"this string used exported default\\";
-"
+const x = "this string used exported default";
+
+`;
+
+exports[`17. preval 1`] = `
+
+const x = preval.require("./fixtures/compute-one")
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+
+`;
+
+exports[`18. preval 1`] = `
+
+const x = preval.require("./fixtures/identity", 3)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 3;
+
+`;
+
+exports[`19. preval 1`] = `
+
+const x = preval.require("./fixtures/identity", SOME_UNKNOWN_VARIABLE)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+Error: <PROJECT_ROOT>/src/__tests__/index.js: preval cannot determine the value of an argument in preval.require
+
+`;
+
+exports[`20. preval 1`] = `
+
+const x = preval.require("./fixtures/compute-one", "should not be here...")
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+Error: <PROJECT_ROOT>/src/__tests__/index.js: \`preval.require\`-ed module (./fixtures/compute-one) cannot accept arguments because it does not export a function. You passed the arguments: should not be here...
+
 `;

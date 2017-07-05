@@ -1,5 +1,17 @@
+import path from 'path'
 import pluginTester from 'babel-plugin-tester'
 import plugin from '../'
+
+const projectRoot = path.join(__dirname, '../../')
+
+expect.addSnapshotSerializer({
+  print(val) {
+    return val.split(projectRoot).join('<PROJECT_ROOT>/')
+  },
+  test(val) {
+    return typeof val === 'string'
+  },
+})
 
 pluginTester({
   plugin,
@@ -61,19 +73,34 @@ pluginTester({
     },
     {
       code:
-        'import x from /* preval(require("./fixtures/compute-one.js")) */ "./fixtures/identity.js"',
+        'import x from /* preval(require("./fixtures/compute-one")) */ "./fixtures/identity"',
       babelOptions: {filename: __filename},
     },
     {
       code:
-        'import x from /* preval(require("./fixtures/es6.js").default) */ "./fixtures/es6-identity.js"',
+        'import x from /* preval(require("./fixtures/es6").default) */ "./fixtures/es6-identity"',
       babelOptions: {filename: __filename},
     },
-
-    // {
-    //   code: 'const x = preval.require("./fixtures/compute-one.js")',
-    //   babelOptions: {filename: __filename},
-    // },
+    {
+      code: 'const x = preval.require("./fixtures/compute-one")',
+      babelOptions: {filename: __filename},
+    },
+    {
+      code: 'const x = preval.require("./fixtures/identity", 3)',
+      babelOptions: {filename: __filename},
+    },
+    {
+      code:
+        'const x = preval.require("./fixtures/identity", SOME_UNKNOWN_VARIABLE)',
+      error: true,
+      babelOptions: {filename: __filename},
+    },
+    {
+      code:
+        'const x = preval.require("./fixtures/compute-one", "should not be here...")',
+      error: true,
+      babelOptions: {filename: __filename},
+    },
 
     // please add a file for your use-case
     // in the `fixtures` directory and make

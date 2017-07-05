@@ -1,5 +1,7 @@
+const p = require('path')
 const babylon = require('babylon')
 const requireFromString = require('require-from-string')
+// const printAST = require('ast-pretty-print')
 
 module.exports = prevalPlugin
 
@@ -48,7 +50,7 @@ function prevalPlugin({types: t, template, transform}) {
             try {
               // allow for transpilation of required modules
               require('babel-register')
-            } catch(e) {
+            } catch (e) {
               // ignore error
             }
             var mod = require('${path.node.source.value}');
@@ -64,6 +66,50 @@ function prevalPlugin({types: t, template, transform}) {
             VALUE: replacement,
           }),
         )
+      },
+      CallExpression(path, {file: {opts: {filename}}}) {
+        const isPreval = looksLike(path, {
+          node: {
+            callee: {
+              type: 'MemberExpression',
+              object: {name: 'preval'},
+              property: {name: 'require'},
+            },
+          },
+        })
+        if (!isPreval) {
+          return
+        }
+        const [source, ...args] = path.get('arguments')
+        const argValues = args.map(a => {
+          const result = a.evaluate()
+          if (!result.confident) {
+            throw new Error(
+              'preval cannot determine the value of an argument in preval.require',
+            )
+          }
+          return result.value
+        })
+        const absolutePath = p.join(p.dirname(filename), source.node.value)
+        try {
+          // allow for transpilation of required modules
+          require('babel-register')
+        } catch (e) {
+          // ignore error
+        }
+        let mod = require(absolutePath)
+        if (argValues.length) {
+          if (typeof mod !== 'function') {
+            throw new Error(
+              `\`preval.require\`-ed module (${source.node
+                .value}) cannot accept arguments because it does not export a function. You passed the arguments: ${argValues.join(
+                ', ',
+              )}`,
+            )
+          }
+          mod = mod(...argValues)
+        }
+        path.replaceWith(objectToAST(mod))
       },
     },
   }
@@ -125,3 +171,9 @@ function isPrimitive(val) {
   // eslint-disable-next-line
   return val == null || /^[sbn]/.test(typeof val);
 }
+
+/*
+eslint
+  import/no-unassigned-import:0
+  import/no-dynamic-require:0
+*/
