@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-preval",
   "version": "0.0.0-semantically-released",
-  "description": "Pre-evaluate a string of code at build-time",
+  "description": "Pre-evaluate code at build-time",
   "main": "dist/index.js",
   "scripts": {
     "start": "nps",
