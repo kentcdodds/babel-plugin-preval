@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`2. preval 1`] = `
+"
+const x = preval\`module.exports = 1\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+"
+`;
+
+exports[`3. preval 1`] = `
+"
+preval\`module.exports = \\"foo\\"\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"foo\\";
+"
+`;
+
+exports[`4. preval 1`] = `
+"
+const y = preval\`
+  module.exports = {
+    booyah: function() {
+      return \\"booyah\\"
+    }
+  }
+\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const y = { \\"booyah\\": function booyah() {
+    return \\"booyah\\";
+  } };
+"
+`;
+
+exports[`5. preval 1`] = `
+"
+const x = preval\`
+  const fs = require('fs')
+  const val = fs.readFileSync(__dirname + '/fixture1.md', 'utf8')
+  module.exports = {
+    val,
+    getSplit: function(splitDelimiter) {
+      return val.split(splitDelimiter)
+    }
+  }
+\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = { \\"val\\": \\"# fixture\\\\n\\\\nThis is some file thing...\\\\n\\", \\"getSplit\\": function getSplit(splitDelimiter) {
+    return val.split(splitDelimiter);
+  } };
+"
+`;
+
+exports[`6. preval 1`] = `
+"
+export default preval\`
+  import path from 'path'
+  export default path.join(__dirname, 'something/whatever.js')
+\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+export default { \\"default\\": \\"/Users/kdodds/Developer/babel-plugin-preval/src/__tests__/fixtures/something/whatever.js\\" };
+"
+`;
+
+exports[`7. preval 1`] = `
+"
+const x = preval\`module.exports = \\"\${dynamic}\\"\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+Error: unknown: Unable to determine the value of your preval string
+"
+`;
