@@ -8,7 +8,6 @@ Pre-evaluate a string of code at build-time
 
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
-[![Dependencies][dependencyci-badge]][dependencyci]
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npm-stat]
 [![MIT License][license-badge]][LICENSE]
@@ -136,8 +135,6 @@ MIT
 [build]: https://travis-ci.org/kentcdodds/babel-plugin-preval
 [coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/babel-plugin-preval.svg?style=flat-square
 [coverage]: https://codecov.io/github/kentcdodds/babel-plugin-preval
-[dependencyci-badge]: https://dependencyci.com/github/kentcdodds/babel-plugin-preval/badge?style=flat-square
-[dependencyci]: https://dependencyci.com/github/kentcdodds/babel-plugin-preval
 [version-badge]: https://img.shields.io/npm/v/babel-plugin-preval.svg?style=flat-square
 [package]: https://www.npmjs.com/package/babel-plugin-preval
 [downloads-badge]: https://img.shields.io/npm/dm/babel-plugin-preval.svg?style=flat-square
