@@ -51,7 +51,7 @@ const x = preval`
   module.exports = {
     val,
     getSplit: function(splitDelimiter) {
-      return val.split(splitDelimiter)
+      return x.val.split(splitDelimiter)
     }
   }
 `
@@ -61,7 +61,7 @@ const x = preval`
 const x = {
   val: '# fixture\n\nThis is some file thing...\n',
   getSplit: function getSplit(splitDelimiter) {
-    return val.split(splitDelimiter)
+    return x.val.split(splitDelimiter)
   },
 }
 ```

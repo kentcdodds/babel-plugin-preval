@@ -4,7 +4,7 @@ const x = preval`
   module.exports = {
     val,
     getSplit: function(splitDelimiter) {
-      return val.split(splitDelimiter)
+      return x.val.split(splitDelimiter)
     }
   }
 `
