@@ -101,6 +101,18 @@ pluginTester({
       error: true,
       babelOptions: {filename: __filename},
     },
+    {
+      skip: true,
+      snapshot: false,
+      code: `
+        // @preval
+        module.exports = 1 + 2 - 1 - 1
+      `,
+      output: `
+        // this file was prevaled
+        module.exports = 1;
+      `,
+    },
 
     // please add a file for your use-case
     // in the `fixtures` directory and make
