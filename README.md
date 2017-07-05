@@ -92,9 +92,7 @@ Important notes:
    you can rely on any babel plugins/transforms that you're used to using
    elsewhere in your codebase.
 
-### In your code:
-
-#### Template Tag
+### Template Tag
 
 **Before**:
 
@@ -130,7 +128,7 @@ const name = 'Bob Hope';
 const person = { "first": "Bob", "last": "Hope" };
 ```
 
-#### import comment
+### import comment
 
 **Before**:
 
@@ -158,7 +156,7 @@ import fileList from /* preval(3) */ './get-list-of-files'
 const fileList = ['file1.md', 'file2.md', 'file3.md']
 ```
 
-#### preval.require
+### preval.require
 
 **Before**:
 
@@ -186,9 +184,9 @@ const fileLastModifiedDate = preval.require('./get-last-modified-date', '../../s
 const fileLastModifiedDate = '2017-07-04'
 ```
 
-### Configure with Babel
+## Configure with Babel
 
-#### Via `.babelrc` (Recommended)
+### Via `.babelrc` (Recommended)
 
 **.babelrc**
 
@@ -198,13 +196,13 @@ const fileLastModifiedDate = '2017-07-04'
 }
 ```
 
-#### Via CLI
+### Via CLI
 
 ```sh
 babel --plugins preval script.js
 ```
 
-#### Via Node API
+### Via Node API
 
 ```javascript
 require('babel-core').transform('code', {
