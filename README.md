@@ -210,6 +210,19 @@ require('babel-core').transform('code', {
 })
 ```
 
+## FAQ
+
+### How is this different from [prepack][prepack]?
+
+`prepack` is intended to be run on your final bundle after you've run your
+webpack/etc magic on it. It does a TON of stuff, but the idea is that your
+code should work with or without prepack.
+
+`babel-plugin-preval` is intended to let you write code that would _not_
+work otherwise. Doing things like reading something from the file system
+are not possible in the browser (or with prepack), but `preval` enables you
+to do this.
+
 ## Inspiration
 
 I needed something like this for the
@@ -268,3 +281,5 @@ MIT
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/kentcdodds/babel-plugin-preval.svg?style=social
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
+[prepack]: https://github.com/facebook/prepack
+
