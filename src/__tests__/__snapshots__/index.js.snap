@@ -42,7 +42,7 @@ exports[`5. preval 1`] = `
 "
 const x = preval\`
   const fs = require('fs')
-  const val = fs.readFileSync(__dirname + '/fixture1.md', 'utf8')
+  const val = fs.readFileSync(require.resolve('./fixture1.md'), 'utf8')
   module.exports = {
     val,
     getSplit: function(splitDelimiter) {
@@ -79,5 +79,85 @@ const x = preval\`module.exports = \\"\${dynamic}\\"\`
       ↓ ↓ ↓ ↓ ↓ ↓
 
 Error: unknown: Unable to determine the value of your preval string
+"
+`;
+
+exports[`8. preval 1`] = `
+"
+import x from /* preval */ \\"./fixtures/compute-one.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+"
+`;
+
+exports[`9. preval 1`] = `
+"
+import x from /* preval */ \\"./fixtures/compute-one.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+"
+`;
+
+exports[`10. preval 1`] = `
+"
+import x from /* preval */ /* this is extra stuff */ \\"./fixtures/compute-one.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+"
+`;
+
+exports[`11. preval 1`] = `
+"
+import x from /* this is extra stuff */ /* preval */ \\"./fixtures/compute-one.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+"
+`;
+
+exports[`13. preval 1`] = `
+"
+import x from /* preval(\\"string argument\\") */ \\"./fixtures/identity.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = \\"string argument\\";
+"
+`;
+
+exports[`14. preval 1`] = `
+"
+import x from /* preval({object: \\"argument\\", withFunction: () => {}}) */ \\"./fixtures/identity.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = { \\"object\\": \\"argument\\", \\"withFunction\\": function withFunction() {} };
+"
+`;
+
+exports[`15. preval 1`] = `
+"
+import x from /* preval(require(\\"./fixtures/compute-one.js\\")) */ \\"./fixtures/identity.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+"
+`;
+
+exports[`16. preval 1`] = `
+"
+import x from /* preval(require(\\"./fixtures/es6.js\\").default) */ \\"./fixtures/es6-identity.js\\"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = \\"this string used exported default\\";
 "
 `;
