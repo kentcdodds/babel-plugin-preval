@@ -63,12 +63,12 @@ exports[`6. preval 1`] = `
 "
 export default preval\`
   import path from 'path'
-  export default path.join(__dirname, 'something/whatever.js')
+  export default path.join(__dirname, 'something/whatever.js').replace(__dirname, '')
 \`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-export default { \\"default\\": \\"/Users/kdodds/Developer/babel-plugin-preval/src/__tests__/fixtures/something/whatever.js\\" };
+export default { \\"default\\": \\"/something/whatever.js\\" };
 "
 `;
 
