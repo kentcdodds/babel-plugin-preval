@@ -118,7 +118,7 @@ const greeting = "Hello world!"
 ```javascript
 const name = 'Bob Hope'
 const person = preval`
-  const [first, last] = require('./name-splitter')(name)
+  const [first, last] = require('./name-splitter')(${name})
   module.exports = {first, last}
 `
 ```
