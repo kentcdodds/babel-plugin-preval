@@ -1,5 +1,5 @@
 <div style="text-align:center">
-# babel-plugin-preval
+<h1>babel-plugin-preval</h1>
 
 Pre-evaluate a string of code at build-time
 </div>
