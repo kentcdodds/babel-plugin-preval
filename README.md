@@ -66,6 +66,11 @@ const x = {
 }
 ```
 
+There's also `preval.require('./something')` and
+`import x from /* preval */ './something'` (which can both take some arguments).
+
+See more below.
+
 ## Installation
 
 This module is distributed via [npm][npm] which is bundled with [node][node] and
@@ -77,7 +82,113 @@ npm install --save-dev babel-plugin-preval
 
 ## Usage
 
-### Via `.babelrc` (Recommended)
+Important notes:
+
+1. All code run by `preval` is _not_ run in a sandboxed environment
+2. All code _must_ run synchronously.
+3. All code will be transpiled via `babel-core` directly or `babel-register`
+   and should follow all of the normal rules for `.babelrc` resolution (the
+   closest `.babelrc` to the file being run is the one that's used). This means
+   you can rely on any babel plugins/transforms that you're used to using
+   elsewhere in your codebase.
+
+### In your code:
+
+#### Template Tag
+
+**Before**:
+
+```javascript
+const greeting = preval`
+  const fs = require('fs')
+  module.exports = fs.readFileSync(require.resolve('./greeting.txt'), 'utf8')
+`
+```
+
+**After** (assuming `greeting.txt` contains the text: `"Hello world!"`):
+
+```javascript
+const greeting = "Hello world!"
+```
+
+`preval` can also handle _some_ simple dynamic values as well:
+
+**Before**:
+
+```javascript
+const name = 'Bob Hope'
+const person = preval`
+  const [first, last] = require('./name-splitter')(name)
+  module.exports = {first, last}
+`
+```
+
+**After** (assuming `./name-splitter` is a function that splits a name into first/last):
+
+```javascript
+const name = 'Bob Hope';
+const person = { "first": "Bob", "last": "Hope" };
+```
+
+#### import comment
+
+**Before**:
+
+```javascript
+import fileList from /* preval */ './get-list-of-files'
+```
+
+**After** (depending on what `./get-list-of-files does`, it might be something like):
+
+```javascript
+const fileList = ['file1.md', 'file2.md', 'file3.md', 'file4.md']
+```
+
+You can also provide arguments which themselves are prevaled!
+
+**Before**:
+
+```javascript
+import fileList from /* preval(3) */ './get-list-of-files'
+```
+
+**After** (assuming `./get-list-of-files` accepts an argument limiting how many files are retrieved:
+
+```javascript
+const fileList = ['file1.md', 'file2.md', 'file3.md']
+```
+
+#### preval.require
+
+**Before**:
+
+```javascript
+const fileLastModifiedDate = preval.require('./get-last-modified-date')
+```
+
+**After**:
+
+```javascript
+const fileLastModifiedDate = '2017-07-05'
+```
+
+And you can provide _some_ simple dynamic arguments as well:
+
+**Before**:
+
+```javascript
+const fileLastModifiedDate = preval.require('./get-last-modified-date', '../../some-other-file.js')
+```
+
+**After**:
+
+```javascript
+const fileLastModifiedDate = '2017-07-04'
+```
+
+### Configure with Babel
+
+#### Via `.babelrc` (Recommended)
 
 **.babelrc**
 
@@ -87,13 +198,13 @@ npm install --save-dev babel-plugin-preval
 }
 ```
 
-### Via CLI
+#### Via CLI
 
 ```sh
 babel --plugins preval script.js
 ```
 
-### Via Node API
+#### Via Node API
 
 ```javascript
 require('babel-core').transform('code', {
