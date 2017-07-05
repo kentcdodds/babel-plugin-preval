@@ -21,7 +21,8 @@
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
-    "babylon": "^6.17.4"
+    "babylon": "^6.17.4",
+    "require-from-string": "^1.2.1"
   },
   "devDependencies": {
     "all-contributors-cli": "^4.3.0",
@@ -46,7 +47,6 @@
     "nps-utils": "^1.2.0",
     "opt-cli": "^1.5.1",
     "prettier-eslint-cli": "^4.0.2",
-    "require-from-string": "1.2.1",
     "validate-commit-msg": "^2.12.1"
   },
   "lint-staged": {
