@@ -67,7 +67,8 @@ const x = {
 ```
 
 There's also `preval.require('./something')` and
-`import x from /* preval */ './something'` (which can both take some arguments).
+`import x from /* preval */ './something'` (which can both take some arguments)
+or add `// @preval` comment at the of a file.
 
 See more below.
 
@@ -182,6 +183,33 @@ const fileLastModifiedDate = preval.require('./get-last-modified-date', '../../s
 
 ```javascript
 const fileLastModifiedDate = '2017-07-04'
+```
+
+### preval file comment (`// @preval`)
+
+Using the preval file comment will update a whole file to be evaluated down to an export.
+
+Whereas the above usages (assignment/import/require) will only preval the scope of the assignment or file being imported.
+
+**Before**:
+
+```javascript
+// @preval
+
+const id = require("./path/identity")
+const one = require("./path/one")
+
+const compose = (...fns) => fns.reduce((f, g) => a => f(g(a)))
+const double = a => a * 2
+const square = a => a * a
+
+module.exports = compose(square, id, double)(one)
+```
+
+**After**:
+
+```javascript
+module.exports = 4
 ```
 
 ## Configure with Babel
