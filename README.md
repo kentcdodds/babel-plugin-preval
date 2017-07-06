@@ -68,7 +68,7 @@ const x = {
 
 There's also `preval.require('./something')` and
 `import x from /* preval */ './something'` (which can both take some arguments)
-or add `// @preval` comment at the of a file.
+or add `// @preval` comment at the top of a file.
 
 See more below.
 
