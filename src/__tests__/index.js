@@ -166,7 +166,8 @@ pluginTester({
         const id = require("./fixtures/identity")
         const computeOne = require("./fixtures/compute-one")
 
-        const compose = (...fns) => a => fns.reduceRight((acc, fn) => fn(acc), a)
+        const compose = (...fns) => fns.reduce((f, g) => a => f(g(a)))
+
         const double = a => a * 2
         const square = a => a * a
 
