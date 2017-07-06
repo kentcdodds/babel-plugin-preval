@@ -1,12 +1,11 @@
 const p = require('path')
 const babylon = require('babylon')
 const requireFromString = require('require-from-string')
-const babel = require('babel-core')
 // const printAST = require('ast-pretty-print')
 
 module.exports = prevalPlugin
 
-function prevalPlugin({types: t, template, transform}) {
+function prevalPlugin({types: t, template, transform, transformFromAst}) {
   const assignmentBuilder = template('const NAME = VALUE')
   return {
     name: 'preval',
@@ -21,10 +20,10 @@ function prevalPlugin({types: t, template, transform}) {
 
         comments.find(isPrevalComment).value = ' this file was prevaled'
 
-        const {code: string} = babel.transformFromAst(path.node)
+        const {code: string} = transformFromAst(path.node)
         const replacement = getReplacement({string, filename})
 
-        const moduleExport = Object.assign(
+        const moduleExports = Object.assign(
           {},
           t.expressionStatement(
             t.assignmentExpression(
@@ -39,7 +38,7 @@ function prevalPlugin({types: t, template, transform}) {
           {leadingComments: comments},
         )
 
-        path.replaceWith(t.program([moduleExport]))
+        path.replaceWith(t.program([moduleExports]))
       },
       TaggedTemplateExpression(path, {file: {opts: {filename}}}) {
         const isPreval = path.node.tag.name === 'preval'
