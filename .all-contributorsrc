@@ -24,7 +24,11 @@
       "name": "Matt Phillips",
       "avatar_url": "https://avatars3.githubusercontent.com/u/5610087?v=3",
       "profile": "http://mattphillips.io",
-      "contributions": []
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
     }
   ]
 }

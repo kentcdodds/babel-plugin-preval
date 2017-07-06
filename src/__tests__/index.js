@@ -102,15 +102,94 @@ pluginTester({
       babelOptions: {filename: __filename},
     },
     {
-      skip: true,
-      snapshot: false,
       code: `
         // @preval
         module.exports = 1 + 2 - 1 - 1
       `,
-      output: `
-        // this file was prevaled
-        module.exports = 1;
+    },
+    {
+      code: `
+        // @preval
+        const ten = 9 + 1
+        module.exports = ten * 5
+      `,
+    },
+    {
+      code: `
+        // @flow
+        // @preval
+        module.exports = 1 + 2 - 1 - 1
+      `,
+    },
+    {
+      code: `
+        // @preval
+        // @flow
+        module.exports = 1 + 2 - 1 - 1
+      `,
+    },
+    {
+      code: `
+        // @preval
+        const name = 'Bob Hope'
+        const splitter = str => str.split(' ')
+        module.exports = splitter(name)
+      `,
+    },
+    {
+      code: `
+        // @preval
+        const name = 'Bob Hope'
+        const splitter = str => str.split(' ')
+        const [first, last] = splitter(name)
+        module.exports = {first, last}
+      `,
+    },
+    {
+      babelOptions: {filename: __filename},
+      code: `
+        // @preval
+        module.exports = require("./fixtures/compute-one")
+      `,
+    },
+    {
+      babelOptions: {filename: __filename},
+      code: `
+        // @preval
+        module.exports = require("./fixtures/identity")('hello world')
+      `,
+    },
+    {
+      babelOptions: {filename: __filename},
+      code: `
+        // @preval
+        const id = require("./fixtures/identity")
+        const computeOne = require("./fixtures/compute-one")
+
+        const compose = (...fns) => fns.reduce((f, g) => a => f(g(a)))
+
+        const double = a => a * 2
+        const square = a => a * a
+
+        module.exports = compose(square, id, double)(computeOne)
+      `,
+    },
+    {
+      babelOptions: {filename: __filename},
+      code: `
+        // @preval
+        const fs = require('fs')
+        module.exports = fs.readFileSync(require.resolve('./fixtures/fixture1.md'), 'utf8')
+      `,
+    },
+    {
+      babelOptions: {filename: __filename},
+      code: `
+        // @preval
+        function fib(x) {
+          return x <= 1 ? x : fib(x - 1) + fib(x - 2);
+        }
+        module.exports = fib(10)
       `,
     },
 

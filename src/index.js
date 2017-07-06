@@ -5,11 +5,41 @@ const requireFromString = require('require-from-string')
 
 module.exports = prevalPlugin
 
-function prevalPlugin({types: t, template, transform}) {
+function prevalPlugin({types: t, template, transform, transformFromAst}) {
   const assignmentBuilder = template('const NAME = VALUE')
   return {
     name: 'preval',
     visitor: {
+      Program(path, {file: {opts: {filename}}}) {
+        const comments = path.node.body[0].leadingComments || []
+        const isPreval = comments.some(isPrevalComment)
+
+        if (!isPreval) {
+          return
+        }
+
+        comments.find(isPrevalComment).value = ' this file was prevaled'
+
+        const {code: string} = transformFromAst(path.node)
+        const replacement = getReplacement({string, filename})
+
+        const moduleExports = Object.assign(
+          {},
+          t.expressionStatement(
+            t.assignmentExpression(
+              '=',
+              t.memberExpression(
+                t.identifier('module'),
+                t.identifier('exports'),
+              ),
+              replacement,
+            ),
+          ),
+          {leadingComments: comments},
+        )
+
+        path.replaceWith(t.program([moduleExports]))
+      },
       TaggedTemplateExpression(path, {file: {opts: {filename}}}) {
         const isPreval = path.node.tag.name === 'preval'
         if (!isPreval) {
@@ -130,7 +160,11 @@ function objectToAST(object) {
 }
 
 function isPrevalComment(comment) {
-  return comment.value.trim().split(' ')[0].trim().startsWith('preval')
+  const normalisedComment = comment.value.trim().split(' ')[0].trim()
+  return (
+    normalisedComment.startsWith('preval') ||
+    normalisedComment.startsWith('@preval')
+  )
 }
 
 function stringify(object) {
