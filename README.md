@@ -240,7 +240,7 @@ here!
 Thanks goes to these people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Tests") | [<img src="https://avatars3.githubusercontent.com/u/5610087?v=3" width="100px;"/><br /><sub>Matt Phillips</sub>](http://mattphillips.io)<br /> |
+| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Tests") | [<img src="https://avatars3.githubusercontent.com/u/5610087?v=3" width="100px;"/><br /><sub>Matt Phillips</sub>](http://mattphillips.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Documentation") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Tests") |
 | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
