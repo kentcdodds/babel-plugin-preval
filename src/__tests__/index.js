@@ -193,6 +193,13 @@ pluginTester({
       `,
     },
 
+    {
+      snapshot: false,
+      code: `
+        import x from "./fixtures/compute-one.js";
+      `,
+    },
+
     // please add a file for your use-case
     // in the `fixtures` directory and make
     // a copy of this that points to your file.

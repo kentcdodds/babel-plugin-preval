@@ -29,6 +29,15 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "philipodev",
+      "name": "Philip Oliver",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/28024000?v=3",
+      "profile": "https://twitter.com/philipodev",
+      "contributions": [
+        "bug"
+      ]
     }
   ]
 }

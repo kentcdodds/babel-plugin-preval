@@ -59,7 +59,7 @@ function prevalPlugin({types: t, template, transform, transformFromAst}) {
           node: {
             source: {
               leadingComments(comments) {
-                return comments.some(isPrevalComment)
+                return comments && comments.some(isPrevalComment)
               },
             },
           },
