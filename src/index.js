@@ -55,15 +55,9 @@ function prevalPlugin({types: t, template, transform, transformFromAst}) {
         path.replaceWith(replacement)
       },
       ImportDeclaration(path, {file: {opts: {filename}}}) {
-        const isPreval = looksLike(path, {
-          node: {
-            source: {
-              leadingComments(comments) {
-                return comments.some(isPrevalComment)
-              },
-            },
-          },
-        })
+        const comments = path.node.source.leadingComments || []
+        const isPreval = comments.some(isPrevalComment)
+
         if (!isPreval) {
           return
         }
@@ -193,9 +187,6 @@ function looksLike(a, b) {
     Object.keys(b).every(bKey => {
       const bVal = b[bKey]
       const aVal = a[bKey]
-      if (typeof bVal === 'function') {
-        return bVal(aVal)
-      }
       return isPrimitive(bVal) ? bVal === aVal : looksLike(aVal, bVal)
     })
   )
