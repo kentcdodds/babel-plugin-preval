@@ -102,14 +102,12 @@ pluginTester({
       babelOptions: {filename: __filename},
     },
     {
-      snapshot: true,
       code: `
         // @preval
         module.exports = 1 + 2 - 1 - 1
       `,
     },
     {
-      snapshot: true,
       code: `
         // @preval
         const ten = 9 + 1
@@ -117,7 +115,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       code: `
         // @flow
         // @preval
@@ -125,7 +122,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       code: `
         // @preval
         // @flow
@@ -133,7 +129,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       code: `
         // @preval
         const name = 'Bob Hope'
@@ -142,7 +137,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       code: `
         // @preval
         const name = 'Bob Hope'
@@ -152,7 +146,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       babelOptions: {filename: __filename},
       code: `
         // @preval
@@ -160,7 +153,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       babelOptions: {filename: __filename},
       code: `
         // @preval
@@ -168,7 +160,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       babelOptions: {filename: __filename},
       code: `
         // @preval
@@ -183,7 +174,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       babelOptions: {filename: __filename},
       code: `
         // @preval
@@ -192,7 +182,6 @@ pluginTester({
       `,
     },
     {
-      snapshot: true,
       babelOptions: {filename: __filename},
       code: `
         // @preval
