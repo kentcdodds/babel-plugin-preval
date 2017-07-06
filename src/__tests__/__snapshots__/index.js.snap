@@ -355,13 +355,3 @@ module.exports = fib(10)
 module.exports = 55;
 
 `;
-
-exports[`32. preval 1`] = `
-
-import x from "./fixtures/compute-one.js"
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-import x from "./fixtures/compute-one.js";
-
-`;

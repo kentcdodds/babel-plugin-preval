@@ -194,9 +194,9 @@ pluginTester({
     },
 
     {
-      babelOptions: {filename: __filename},
+      snapshot: false,
       code: `
-        import x from "./fixtures/compute-one.js"
+        import x from "./fixtures/compute-one.js";
       `,
     },
 
