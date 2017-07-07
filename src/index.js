@@ -1,11 +1,11 @@
 const p = require('path')
-const babylon = require('babylon')
-const requireFromString = require('require-from-string')
 // const printAST = require('ast-pretty-print')
+const getReplacement = require('./get-replacement')
+const objectToAST = require('./object-to-ast')
 
 module.exports = prevalPlugin
 
-function prevalPlugin({types: t, template, transform, transformFromAst}) {
+function prevalPlugin({types: t, template, transformFromAst}) {
   const assignmentBuilder = template('const NAME = VALUE')
   return {
     name: 'preval',
@@ -47,9 +47,7 @@ function prevalPlugin({types: t, template, transform, transformFromAst}) {
         }
         const string = path.get('quasi').evaluate().value
         if (!string) {
-          throw new Error(
-            'Unable to determine the value of your preval string',
-          )
+          throw new Error('Unable to determine the value of your preval string')
         }
         const replacement = getReplacement({string, filename})
         path.replaceWith(replacement)
@@ -143,20 +141,6 @@ function prevalPlugin({types: t, template, transform, transformFromAst}) {
       },
     },
   }
-
-  function getReplacement({string: stringToPreval, filename}) {
-    const {code: transpiled} = transform(stringToPreval, {
-      filename,
-    })
-    const val = requireFromString(transpiled, filename)
-    return objectToAST(val)
-  }
-}
-
-function objectToAST(object) {
-  const stringified = stringify(object)
-  const fileNode = babylon.parse(`var x = ${stringified}`)
-  return fileNode.program.body[0].declarations[0].init
 }
 
 function isPrevalComment(comment) {
@@ -165,25 +149,6 @@ function isPrevalComment(comment) {
     normalisedComment.startsWith('preval') ||
     normalisedComment.startsWith('@preval')
   )
-}
-
-function stringify(object) {
-  // if (typeof object === 'string') {
-  //   return object
-  // }
-  return JSON.stringify(object, stringifyReplacer).replace(
-    /"__FUNCTION_START__(.*)__FUNCTION_END__"/g,
-    functionReplacer,
-  )
-  function stringifyReplacer(key, value) {
-    if (typeof value === 'function') {
-      return `__FUNCTION_START__${value.toString()}__FUNCTION_END__`
-    }
-    return value
-  }
-  function functionReplacer(match, p1) {
-    return p1.replace(/\\"/g, '"').replace(/\\n/g, '\n')
-  }
 }
 
 function looksLike(a, b) {
@@ -203,7 +168,7 @@ function looksLike(a, b) {
 
 function isPrimitive(val) {
   // eslint-disable-next-line
-  return val == null || /^[sbn]/.test(typeof val);
+  return val == null || /^[sbn]/.test(typeof val)
 }
 
 /*

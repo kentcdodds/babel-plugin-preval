@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1. as tag 1`] = `
+
+import preval from '../macros'
+
+const x = preval\`module.exports = require('./fixtures/compute-one')\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
+
+`;
+
+exports[`2. as function 1`] = `
+
+const myPreval = require('../macros')
+
+const x = myPreval(\`
+  module.exports = require('./fixtures/identity')({sayHi: () => 'hi'})
+\`)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = { "sayHi": function sayHi() {
+    return 'hi';
+  } };
+
+`;
+
+exports[`3. as jsx 1`] = `
+
+const Preval = require('../macros')
+
+const ui = (
+  <Preval>
+    const fs = require('fs')
+    module.exports = fs.readFileSync(require.resolve('./fixtures/fixture1.md'), 'utf8')
+  </Preval>
+)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const ui = <div>"# fixture\\n\\nThis is some file thing...\\n"</div>;
+
+`;
