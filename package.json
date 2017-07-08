@@ -9,8 +9,15 @@
     "commitmsg": "opt --in commit-msg --exec \"validate-commit-msg\"",
     "precommit": "lint-staged && opt --in pre-commit --exec \"npm start validate\""
   },
-  "files": ["dist"],
-  "keywords": ["babel", "babel-plugin", "eval", "precompile"],
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "eval",
+    "precompile"
+  ],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
@@ -23,7 +30,7 @@
     "ast-pretty-print": "^2.0.0",
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
-    "babel-macros": "0.3.0",
+    "babel-macros": "0.4.0",
     "babel-plugin-tester": "^3.2.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-inline-environment-variables": "0.1.1",
@@ -44,11 +51,17 @@
     "validate-commit-msg": "^2.12.1"
   },
   "lint-staged": {
-    "*.js": ["prettier-eslint --write --print-width=80", "git add"]
+    "*.js": [
+      "prettier-eslint --write --print-width=80",
+      "git add"
+    ]
   },
   "jest": {
     "testEnvironment": "node",
-    "testPathIgnorePatterns": ["/node_modules/", "/fixtures/"],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/fixtures/"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,

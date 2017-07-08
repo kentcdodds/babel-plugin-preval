@@ -1,8 +1,28 @@
 // const printAST = require('ast-pretty-print')
 const getReplacement = require('./get-replacement')
 
-// this implements the babel-macros v0.2.0 API
-module.exports = {asTag, asFunction, asJSX}
+// this implements the babel-macros v0.4.0 API
+module.exports = prevalMacros
+
+function prevalMacros({references, state}) {
+  references.default.forEach(referencePath => {
+    if (referencePath.parentPath.type === 'TaggedTemplateExpression') {
+      asTag(referencePath.parentPath.get('quasi'), state)
+    } else if (referencePath.parentPath.type === 'CallExpression') {
+      asFunction(referencePath.parentPath.get('arguments'), state)
+    } else if (referencePath.parentPath.type === 'JSXOpeningElement') {
+      asJSX(
+        {
+          attributes: referencePath.parentPath.get('attributes'),
+          children: referencePath.parentPath.parentPath.get('children'),
+        },
+        state,
+      )
+    } else {
+      // TODO: throw a helpful error message
+    }
+  })
+}
 
 function asTag(quasiPath, {file: {opts: {filename}}}) {
   const string = quasiPath.parentPath.get('quasi').evaluate().value
