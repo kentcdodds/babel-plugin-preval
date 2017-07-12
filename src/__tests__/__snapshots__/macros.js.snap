@@ -2,7 +2,7 @@
 
 exports[`1. as tag 1`] = `
 
-import preval from '../macros'
+import preval from '../macro'
 
 const x = preval\`module.exports = require('./fixtures/compute-one')\`
 
@@ -14,7 +14,7 @@ const x = 1;
 
 exports[`2. as function 1`] = `
 
-const myPreval = require('../macros')
+const myPreval = require('../macro')
 
 const x = myPreval(\`
   module.exports = require('./fixtures/identity')({sayHi: () => 'hi'})
@@ -30,7 +30,7 @@ const x = { "sayHi": function sayHi() {
 
 exports[`3. as jsx 1`] = `
 
-const Preval = require('../macros')
+const Preval = require('../macro')
 
 const ui = (
   <Preval>

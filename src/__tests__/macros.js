@@ -20,7 +20,7 @@ pluginTester({
     {
       title: 'as tag',
       code: `
-        import preval from '../macros'
+        import preval from '../macro'
 
         const x = preval\`module.exports = require('./fixtures/compute-one')\`
       `,
@@ -28,7 +28,7 @@ pluginTester({
     {
       title: 'as function',
       code: `
-        const myPreval = require('../macros')
+        const myPreval = require('../macro')
 
         const x = myPreval(\`
           module.exports = require('./fixtures/identity')({sayHi: () => 'hi'})
@@ -38,7 +38,7 @@ pluginTester({
     {
       title: 'as jsx',
       code: `
-        const Preval = require('../macros')
+        const Preval = require('../macro')
 
         const ui = (
           <Preval>
