@@ -4,3 +4,6 @@ dist
 .opt-in
 .opt-out
 *.log
+
+package-lock.json
+yarn.lock
