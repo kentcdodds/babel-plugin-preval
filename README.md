@@ -250,6 +250,18 @@ import preval from 'babel-plugin-preval/macro'
 const one = preval`module.exports = 1 + 2 - 1 - 1`
 ```
 
+> You could also use [`preval.macro`][preval.macro] if you'd prefer to type less 😀
+
+## Examples
+
+- [Mastodon](https://github.com/tootsuite/mastodon/pull/4202) saved 40kb
+  (gzipped) using `babel-plugin-preval`
+- [glamorous-website](https://github.com/kentcdodds/glamorous-website/pull/235)
+  uses [`preval.macro`][preval.macro] to determine Algolia options based on
+  `process.env.LOCALE`. It also uses [`preval.macro`][preval.macro] to load an
+  `svg` file as a string, `base64` encode it, and use it as a `background-url`
+  for an input element.
+
 ## FAQ
 
 ### How is this different from [prepack][prepack]?
@@ -269,6 +281,10 @@ I needed something like this for the
 [glamorous website](https://github.com/kentcdodds/glamorous-website).
 I live-streamed developing the whole thing. If you're interested you can find
 the recording on [my twitch](https://www.twitch.tv/kentcdodds).
+
+## Related Projects
+
+- [`preval.macro`][preval.macro] - nicer integration with `babel-macros`
 
 ## Other Solutions
 
@@ -323,3 +339,4 @@ MIT
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [prepack]: https://github.com/facebook/prepack
 [babel-macros]: https://github.com/kentcdodds/babel-macros
+[preval.macro]: https://github.com/kentcdodds/preval.macro
