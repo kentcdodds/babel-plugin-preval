@@ -238,6 +238,18 @@ require('babel-core').transform('code', {
 })
 ```
 
+## Use with [`babel-macros`][babel-macros]
+
+Once you've [configured `babel-macros`](https://github.com/kentcdodds/babel-macros/blob/master/other/docs/user.md)
+you can import/require the preval macro at `babel-plugin-preval/macro`.
+For example:
+
+```javascript
+import preval from 'babel-plugin-preval/macro'
+
+const one = preval`module.exports = 1 + 2 - 1 - 1`
+```
+
 ## FAQ
 
 ### How is this different from [prepack][prepack]?
@@ -310,4 +322,4 @@ MIT
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [prepack]: https://github.com/facebook/prepack
-
+[babel-macros]: https://github.com/kentcdodds/babel-macros
