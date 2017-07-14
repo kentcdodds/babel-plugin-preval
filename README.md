@@ -275,12 +275,26 @@ work otherwise. Doing things like reading something from the file system
 are not possible in the browser (or with prepack), but `preval` enables you
 to do this.
 
+### How is this different from [webpack][webpack] [loaders][webpack-loaders]?
+
+This plugin was inspired by webpack's [val-loader][val-loader]. The benefit of
+using this over that loader (or any other loader) is that it integrates with
+your existing babel pipeline. This is especially useful for the server where
+you're probably not bundling your code with `webpack`, but you may be using
+babel. (If you're not using either, configuring babel for this would be easier
+than configuring webpack for `val-loader`).
+
+In addition, you can implement pretty much any webpack loader using
+`babel-plugin-preval`.
+
 ## Inspiration
 
 I needed something like this for the
 [glamorous website](https://github.com/kentcdodds/glamorous-website).
 I live-streamed developing the whole thing. If you're interested you can find
 the recording on [my twitch](https://www.twitch.tv/kentcdodds).
+
+I was inspired by the [val-loader][val-loader] from webpack.
 
 ## Related Projects
 
@@ -340,3 +354,6 @@ MIT
 [prepack]: https://github.com/facebook/prepack
 [babel-macros]: https://github.com/kentcdodds/babel-macros
 [preval.macro]: https://github.com/kentcdodds/preval.macro
+[webpack]: https://webpack.js.org/
+[webpack-loaders]: https://webpack.js.org/concepts/loaders/
+[val-loader]: https://github.com/webpack-contrib/val-loader
