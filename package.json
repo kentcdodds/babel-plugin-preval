@@ -10,7 +10,8 @@
     "precommit": "lint-staged && opt --in pre-commit --exec \"npm start validate\""
   },
   "files": [
-    "dist"
+    "dist",
+    "macro.js"
   ],
   "keywords": [
     "babel",
