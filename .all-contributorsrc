@@ -38,6 +38,17 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "sorin-davidoi",
+      "name": "Sorin Davidoi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2109702?v=3",
+      "profile": "https://toot.cafe/@sorin",
+      "contributions": [
+        "bug",
+        "code",
+        "test"
+      ]
     }
   ]
 }

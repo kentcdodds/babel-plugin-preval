@@ -90,6 +90,10 @@ pluginTester({
       babelOptions: {filename: __filename},
     },
     {
+      code: 'const x = preval.require("./fixtures/multiple-functions")',
+      babelOptions: {filename: __filename},
+    },
+    {
       code:
         'const x = preval.require("./fixtures/identity", SOME_UNKNOWN_VARIABLE)',
       error: true,

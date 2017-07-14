@@ -10,7 +10,7 @@ function objectToAST(object) {
 
 function stringify(object) {
   return JSON.stringify(object, stringifyReplacer).replace(
-    /"__FUNCTION_START__(.*)__FUNCTION_END__"/g,
+    /"__FUNCTION_START__(.*?)__FUNCTION_END__"/g,
     functionReplacer,
   )
   function stringifyReplacer(key, value) {
