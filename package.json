@@ -2,6 +2,10 @@
   "name": "babel-plugin-preval",
   "version": "0.0.0-semantically-released",
   "description": "Pre-evaluate code at build-time",
+  "engines": {
+    "node": ">=4",
+    "npm": ">=3"
+  },
   "main": "dist/index.js",
   "scripts": {
     "start": "nps",
