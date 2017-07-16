@@ -44,19 +44,11 @@ const posts = fs
 module.exports = posts || [];
 ```
 
-Preval the `getPosts.js` module so that posts loaded and exported.
+Preval the `getPosts.js` module so that posts are loaded and exported.
 ```js
 import preval from 'preval.macro';
 
-const getPostsCode = preval`
-  const fs = require('fs');
-  const code = fs.readFileSync('./getPosts.js', 'utf8');
-  module.exports = code.toString();
-`;
-
-const posts = preval`${getPostsCode}`;
-
-export default posts;
+export default preval`module.exports = require('./getPosts')`;
 ```
 
 Now you can import the above posts and use a module like [marked](https://github.com/chjj/marked) to convert your markdown into blog posts! The underlying `getPosts.js` module can also be used required in `next.config.js` to build the static list of routes for `next export`. See the full example in the [Next Static](https://github.com/infiniteluke/next-static) project.
