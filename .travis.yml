@@ -7,6 +7,10 @@ notifications:
   email: false
 node_js:
   - '8'
+  - '6'
+  - '4'
+before_install:
+  - npm i -g npm@^5.3.0
 script:
   - npm start validate
 after_success:
