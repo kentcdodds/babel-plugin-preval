@@ -262,6 +262,7 @@ const one = preval`module.exports = 1 + 2 - 1 - 1`
   `svg` file as a string, `base64` encode it, and use it as a `background-url`
   for an input element.
 - [Generate documentation for React components](https://gist.github.com/souporserious/575609dc5a5d52e167dd2236079eccc0)
+- [Serverless with webpack](https://github.com/geovanisouza92/serverless-preval) build serverless functions using webpack and Babel for development and production with preval to replace (possible sensible) content in code.
 
 ## FAQ
 
