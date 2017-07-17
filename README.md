@@ -261,6 +261,7 @@ const one = preval`module.exports = 1 + 2 - 1 - 1`
   `process.env.LOCALE`. It also uses [`preval.macro`][preval.macro] to load an
   `svg` file as a string, `base64` encode it, and use it as a `background-url`
   for an input element.
+- [Generate documentation for React components](https://gist.github.com/souporserious/575609dc5a5d52e167dd2236079eccc0)
 
 ## FAQ
 
