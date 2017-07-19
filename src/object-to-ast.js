@@ -9,7 +9,11 @@ function objectToAST(object) {
 }
 
 function stringify(object) {
-  return JSON.stringify(object, stringifyReplacer).replace(
+  let str = JSON.stringify(object, stringifyReplacer)
+  if (str === undefined) {
+    str = 'undefined'
+  }
+  return str.replace(
     /"__FUNCTION_START__(.*?)__FUNCTION_END__"/g,
     functionReplacer,
   )
