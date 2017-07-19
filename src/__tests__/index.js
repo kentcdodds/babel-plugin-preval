@@ -203,6 +203,13 @@ pluginTester({
         import x from "./fixtures/compute-one.js";
       `,
     },
+    {
+      code: `
+        // @preval
+        let smth = {}
+        module.exports = smth.UNDEFINED;
+      `,
+    },
 
     // please add a file for your use-case
     // in the `fixtures` directory and make

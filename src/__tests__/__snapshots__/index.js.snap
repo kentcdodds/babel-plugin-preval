@@ -369,3 +369,16 @@ module.exports = fib(10)
 module.exports = 55;
 
 `;
+
+exports[`34. preval 1`] = `
+
+// @preval
+let smth = {}
+module.exports = smth.UNDEFINED;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// this file was prevaled
+module.exports = undefined;
+
+`;
