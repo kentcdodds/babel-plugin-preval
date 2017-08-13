@@ -67,6 +67,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "obartra",
+      "name": "Oscar",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3877773?v=4",
+      "profile": "http://obartra.github.io",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ]
 }
