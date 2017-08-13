@@ -11,7 +11,8 @@ function prevalPlugin({types: t, template, transformFromAst}) {
     name: 'preval',
     visitor: {
       Program(path, {file: {opts: {filename}}}) {
-        const comments = path.node.body[0].leadingComments || []
+        const firstNode = path.node.body[0] || {}
+        const comments = firstNode.leadingComments || []
         const isPreval = comments.some(isPrevalComment)
 
         if (!isPreval) {
@@ -47,7 +48,9 @@ function prevalPlugin({types: t, template, transformFromAst}) {
         }
         const string = path.get('quasi').evaluate().value
         if (!string) {
-          throw new Error('Unable to determine the value of your preval string')
+          throw new Error(
+            'Unable to determine the value of your preval string',
+          )
         }
         const replacement = getReplacement({string, filename})
         path.replaceWith(replacement)
@@ -168,7 +171,7 @@ function looksLike(a, b) {
 
 function isPrimitive(val) {
   // eslint-disable-next-line
-  return val == null || /^[sbn]/.test(typeof val)
+  return val == null || /^[sbn]/.test(typeof val);
 }
 
 /*

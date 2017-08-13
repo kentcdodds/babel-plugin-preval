@@ -210,6 +210,16 @@ pluginTester({
         module.exports = smth.UNDEFINED;
       `,
     },
+    {
+      snapshot: false,
+      code: '// @preval',
+    },
+    {
+      snapshot: false,
+      code: `
+        // @preval
+        /* comment */`,
+    },
 
     // please add a file for your use-case
     // in the `fixtures` directory and make
