@@ -268,10 +268,13 @@ const one = preval`module.exports = 1 + 2 - 1 - 1`
 
 If you use `babel-plugin-transform-decorators-legacy`, there is a conflict because both plugins must be placed at the top
 
-preval: ok, decorators: not ok
+Solution:
 ```json
 {
-  "plugins": ["preval", "transform-decorators-legacy"]
+  "plugins": [
+    ["transform-decorators-legacy"],
+    ["preval"]
+  ]
 }
 ```
 
