@@ -8,86 +8,36 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "start": "nps",
-    "test": "nps test",
-    "commitmsg": "opt --in commit-msg --exec \"validate-commit-msg\"",
-    "precommit": "lint-staged && opt --in pre-commit --exec \"npm start validate\""
+    "add-contributor": "kcd-scripts contributors add",
+    "build": "kcd-scripts build",
+    "lint": "kcd-scripts lint",
+    "test": "kcd-scripts test",
+    "test:update": "npm test -- --updateSnapshot --coverage",
+    "validate": "kcd-scripts validate",
+    "precommit": "kcd-scripts precommit"
   },
-  "files": [
-    "dist",
-    "macro.js"
-  ],
-  "keywords": [
-    "babel",
-    "babel-plugin",
-    "eval",
-    "precompile"
-  ],
+  "files": ["dist", "macro.js"],
+  "keywords": ["babel", "babel-plugin", "eval", "precompile"],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
-    "babel-core": "^6.25.0",
-    "babel-register": "^6.25.0",
-    "babylon": "^6.17.4",
+    "babel-core": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "babylon": "^6.18.0",
     "require-from-string": "^1.2.1"
   },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js"
+  },
+  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "babel": {
+    "presets": "kcd-scripts/babel"
+  },
   "devDependencies": {
-    "all-contributors-cli": "^4.3.0",
     "ast-pretty-print": "^2.0.0",
-    "babel-cli": "^6.24.1",
-    "babel-jest": "^20.0.3",
-    "babel-macros": "0.5.0",
-    "babel-plugin-tester": "^3.2.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-inline-environment-variables": "0.1.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.1",
-    "babel-register": "^6.24.1",
-    "commitizen": "^2.9.6",
-    "cz-conventional-changelog": "^2.0.0",
-    "eslint": "^4.1.1",
-    "eslint-config-kentcdodds": "^12.4.0",
-    "eslint-plugin-babel": "4.1.1",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jest": "20.0.3",
-    "husky": "^0.14.2",
-    "jest": "^20.0.4",
-    "lint-staged": "^4.0.0",
-    "nps": "^5.3.1",
-    "nps-utils": "^1.2.0",
-    "opt-cli": "^1.5.1",
-    "prettier-eslint-cli": "^4.0.2",
-    "validate-commit-msg": "^2.12.1"
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier-eslint --write --print-width=80",
-      "git add"
-    ]
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/fixtures/"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "src/macros.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
+    "babel-macros": "^0.5.2",
+    "babel-plugin-tester": "^4.0.0",
+    "kcd-scripts": "^0.2.3"
   },
   "repository": {
     "type": "git",

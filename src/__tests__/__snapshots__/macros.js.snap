@@ -1,18 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`1. as tag 1`] = `
-
-import preval from '../macro'
-
-const x = preval\`module.exports = require('./fixtures/compute-one')\`
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-const x = 1;
-
-`;
-
-exports[`2. as function 1`] = `
+exports[`as function 1`] = `
 
 const myPreval = require('../macro')
 
@@ -28,7 +16,7 @@ const x = { "sayHi": function sayHi() {
 
 `;
 
-exports[`3. as jsx 1`] = `
+exports[`as jsx 1`] = `
 
 const Preval = require('../macro')
 
@@ -42,5 +30,17 @@ const ui = (
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const ui = <div>"# fixture\\n\\nThis is some file thing...\\n"</div>;
+
+`;
+
+exports[`as tag 1`] = `
+
+import preval from '../macro'
+
+const x = preval\`module.exports = require('./fixtures/compute-one')\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1;
 
 `;
