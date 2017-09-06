@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 // const printAST = require('ast-pretty-print')
 const getReplacement = require('./get-replacement')
 
@@ -54,9 +55,7 @@ function asJSX({attributes, children}, {file: {opts: {filename}}}) {
       filename,
     }),
   )
-  const {
-    parentPath: {node: {openingElement, closingElement}},
-  } = children[0]
+  const {parentPath: {node: {openingElement, closingElement}}} = children[0]
   openingElement.name.name = 'div'
   closingElement.name.name = 'div'
 }
