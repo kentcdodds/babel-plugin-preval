@@ -17,7 +17,7 @@
     "precommit": "kcd-scripts precommit"
   },
   "files": ["dist", "macro.js"],
-  "keywords": ["babel", "babel-plugin", "eval", "precompile"],
+  "keywords": ["babel", "babel-plugin", "eval", "precompile", "babel-macros"],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {

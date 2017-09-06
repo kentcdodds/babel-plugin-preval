@@ -16,7 +16,7 @@ Pre-evaluate code at build-time
 [![PRs Welcome][prs-badge]][prs]
 [![Donate][donate-badge]][donate]
 [![Code of Conduct][coc-badge]][coc]
-[![Roadmap][roadmap-badge]][roadmap]
+[![Babel Macro][macros-badge]][babel-macros]
 [![Examples][examples-badge]][examples]
 
 [![Watch on GitHub][github-watch-badge]][github-watch]
@@ -368,8 +368,8 @@ MIT
 [donate]: http://kcd.im/donate
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/other/CODE_OF_CONDUCT.md
-[roadmap-badge]: https://img.shields.io/badge/%F0%9F%93%94-roadmap-CD9523.svg?style=flat-square
-[roadmap]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/other/ROADMAP.md
+[macros-badge]: https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square
+[babel-macros]: https://github.com/kentcdodds/babel-macros
 [examples-badge]: https://img.shields.io/badge/%F0%9F%92%A1-examples-8C8E93.svg?style=flat-square
 [examples]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/other/EXAMPLES.md
 [github-watch-badge]: https://img.shields.io/github/watchers/kentcdodds/babel-plugin-preval.svg?style=social
@@ -381,7 +381,6 @@ MIT
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [prepack]: https://github.com/facebook/prepack
-[babel-macros]: https://github.com/kentcdodds/babel-macros
 [preval.macro]: https://github.com/kentcdodds/preval.macro
 [webpack]: https://webpack.js.org/
 [webpack-loaders]: https://webpack.js.org/concepts/loaders/
