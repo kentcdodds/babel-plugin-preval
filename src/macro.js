@@ -1,9 +1,9 @@
 /* istanbul ignore next */
 // const printAST = require('ast-pretty-print')
+const {createMacro} = require('babel-macros')
 const getReplacement = require('./get-replacement')
 
-// this implements the babel-macros v0.4.0 API
-module.exports = prevalMacros
+module.exports = createMacro(prevalMacros)
 
 function prevalMacros({references, state}) {
   references.default.forEach(referencePath => {
