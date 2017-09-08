@@ -78,7 +78,7 @@ const x = preval\`module.exports = "\${dynamic}"\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: unknown: Unable to determine the value of your preval string
+Error: <PROJECT_ROOT>/src/__tests__/index.js: Unable to determine the value of your preval string
 
 `;
 
