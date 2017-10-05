@@ -48,9 +48,7 @@ function prevalPlugin({types: t, template, transformFromAst}) {
         }
         const string = path.get('quasi').evaluate().value
         if (!string) {
-          throw new Error(
-            'Unable to determine the value of your preval string',
-          )
+          throw new Error('Unable to determine the value of your preval string')
         }
         const replacement = getReplacement({string, filename})
         path.replaceWith(replacement)
@@ -121,7 +119,7 @@ function prevalPlugin({types: t, template, transformFromAst}) {
           }
           return result.value
         })
-        const absolutePath = p.join(p.dirname(filename), source.node.value)
+        const absolutePath = p.resolve(p.dirname(filename), source.node.value)
         try {
           // allow for transpilation of required modules
           require('babel-register')
@@ -147,7 +145,10 @@ function prevalPlugin({types: t, template, transformFromAst}) {
 }
 
 function isPrevalComment(comment) {
-  const normalisedComment = comment.value.trim().split(' ')[0].trim()
+  const normalisedComment = comment.value
+    .trim()
+    .split(' ')[0]
+    .trim()
   return (
     normalisedComment.startsWith('preval') ||
     normalisedComment.startsWith('@preval')
@@ -171,7 +172,7 @@ function looksLike(a, b) {
 
 function isPrimitive(val) {
   // eslint-disable-next-line
-  return val == null || /^[sbn]/.test(typeof val);
+  return val == null || /^[sbn]/.test(typeof val)
 }
 
 /*
