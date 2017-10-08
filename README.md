@@ -320,7 +320,8 @@ In addition, you can implement pretty much any webpack loader using
 I needed something like this for the
 [glamorous website](https://github.com/kentcdodds/glamorous-website).
 I live-streamed developing the whole thing. If you're interested you can find
-the recording on [my twitch](https://www.twitch.tv/kentcdodds).
+[the recording on my youtube channel](https://www.youtube.com/watch?v=3vxov5xUai8&index=19&list=PLV5CVI1eNcJh5CTgArGVwANebCrAh2OUE)
+(note, screen only recording, no audio).
 
 I was inspired by the [val-loader][val-loader] from webpack.
 
