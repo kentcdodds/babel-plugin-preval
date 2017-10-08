@@ -53,6 +53,7 @@ pluginTester({
     'const x = preval.require("./fixtures/compute-one")',
     'const x = preval.require("./fixtures/identity", 3)',
     'const x = preval.require("./fixtures/multiple-functions")',
+    'const x = preval.require("../__tests__/fixtures/nested/absolute-path")',
     error(
       'const x = preval.require("./fixtures/identity", SOME_UNKNOWN_VARIABLE)',
     ),
