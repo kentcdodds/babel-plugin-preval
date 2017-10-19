@@ -19,8 +19,13 @@ function prevalMacros({references, state}) {
         },
         state,
       )
+    } else if (referencePath.parentPath.type === 'JSXClosingElement') {
+      // That's okay, we already prevaled this one on its opening element.
     } else {
-      // TODO: throw a helpful error message
+      throw new Error(
+        `babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried ${referencePath
+          .parentPath.type}.`,
+      )
     }
   })
 }

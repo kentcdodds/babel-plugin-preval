@@ -93,6 +93,16 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/9248479?v=4",
       "profile": "http://bekrin.me",
       "contributions": []
+    },
+    {
+      "login": "maurobringolf",
+      "name": "Mauro Bringolf",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/18613301?v=4",
+      "profile": "https://maurobringolf.ch",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ]
 }

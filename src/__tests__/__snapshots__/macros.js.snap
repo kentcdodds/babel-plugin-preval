@@ -44,3 +44,15 @@ const x = preval\`module.exports = require('./fixtures/compute-one')\`
 const x = 1;
 
 `;
+
+exports[`error for other nodes 1`] = `
+
+const preval = require('../macro')
+
+x = 3 + preval
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+Error: <PROJECT_ROOT>/src/__tests__/macros.js: ../macro: babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried BinaryExpression.
+
+`;
