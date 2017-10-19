@@ -48,6 +48,15 @@ pluginTester({
         )
       `,
     },
+    {
+      title: 'error for other nodes',
+      error: true,
+      code: `
+        const preval = require('../macro')
+
+        x = 3 + preval
+      `,
+    },
   ]),
 })
 
