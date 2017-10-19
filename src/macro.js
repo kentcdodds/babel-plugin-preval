@@ -20,7 +20,9 @@ function prevalMacros({references, state}) {
         state,
       )
     } else {
-      // TODO: throw a helpful error message
+      throw new Error(
+        'babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element.',
+      )
     }
   })
 }
