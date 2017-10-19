@@ -54,7 +54,6 @@ function asFunction(argumentsPaths, {file: {opts: {filename}}}) {
 function asJSX({attributes, children}, {file: {opts: {filename}}}) {
   // It's a shame you cannot use evaluate() with JSX
   const string = children[0].node.value
-  console.log(string)
   children[0].replaceWith(
     getReplacement({
       string,
