@@ -21,7 +21,8 @@ function prevalMacros({references, state}) {
       )
     } else {
       throw new Error(
-        'babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element.',
+        `babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried ${referencePath
+          .parentPath.type}.`,
       )
     }
   })
