@@ -252,7 +252,7 @@ import preval from 'babel-plugin-preval/macro'
 const one = preval`module.exports = 1 + 2 - 1 - 1`
 ```
 
-> You could also use [`preval.macro`][preval.macro] if you'd prefer to type less 😀
+> You could also use [`preval.macro`][preval.macro] if you'd prefer to type more 😀
 
 ## Examples
 
