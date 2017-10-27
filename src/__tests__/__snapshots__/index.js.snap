@@ -32,7 +32,7 @@ const y = preval\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const y = { "booyah": function booyah() {
+const y = { "booyah": function () {
     return "booyah";
   } };
 
@@ -138,7 +138,7 @@ import x from /* preval({object: "argument", withFunction: () => {}}) */ "./fixt
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = { "object": "argument", "withFunction": function withFunction() {} };
+const x = { "object": "argument", "withFunction": () => {} };
 
 `;
 

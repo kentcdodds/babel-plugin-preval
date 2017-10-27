@@ -9,7 +9,6 @@ node_js: '8'
 install: npm install
 script: npm run validate
 after_success:
-  - npx codecov
-  - npx -p semantic-release@7 -c "semantic-release pre && npm publish && semantic-release post"
+  - kcd-scripts travis-after-success
 branches:
   only: master
