@@ -10,9 +10,7 @@ const x = myPreval(\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = { "sayHi": function sayHi() {
-    return 'hi';
-  } };
+const x = { "sayHi": () => 'hi' };
 
 `;
 
@@ -53,6 +51,6 @@ x = 3 + preval
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/macros.js: ../macro: babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried BinaryExpression.
+Error: <PROJECT_ROOT>/src/__tests__/macro.js: ../macro: babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried BinaryExpression.
 
 `;

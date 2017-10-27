@@ -16,7 +16,8 @@ expect.addSnapshotSerializer({
 pluginTester({
   plugin,
   snapshot: true,
-  tests: withFilename([
+  babelOptions: {filename: __filename, parserOpts: {plugins: ['jsx']}},
+  tests: [
     {
       title: 'as tag',
       code: `
@@ -57,26 +58,5 @@ pluginTester({
         x = 3 + preval
       `,
     },
-  ]),
+  ],
 })
-
-/*
- * This adds the filename to each test so you can do require/import relative
- * to this test file.
- */
-function withFilename(tests) {
-  return tests.map(t => {
-    const test = {babelOptions: {filename: __filename}}
-    if (typeof t === 'string') {
-      test.code = t
-    } else {
-      Object.assign(test, t)
-      test.babelOptions.parserOpts = test.babelOptions.parserOpts || {}
-    }
-    Object.assign(test.babelOptions.parserOpts, {
-      // add the jsx plugin to all tests because why not?
-      plugins: ['jsx'],
-    })
-    return test
-  })
-}

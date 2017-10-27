@@ -1,4 +1,3 @@
-/* istanbul ignore next */
 // const printAST = require('ast-pretty-print')
 const {createMacro} = require('babel-macros')
 const getReplacement = require('./get-replacement')
