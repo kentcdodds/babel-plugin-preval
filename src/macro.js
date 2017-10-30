@@ -4,12 +4,12 @@ const getReplacement = require('./get-replacement')
 
 module.exports = createMacro(prevalMacros)
 
-function prevalMacros({references, state}) {
+function prevalMacros({references, state, babel}) {
   references.default.forEach(referencePath => {
     if (referencePath.parentPath.type === 'TaggedTemplateExpression') {
-      asTag(referencePath.parentPath.get('quasi'), state)
+      asTag(referencePath.parentPath.get('quasi'), state, babel)
     } else if (referencePath.parentPath.type === 'CallExpression') {
-      asFunction(referencePath.parentPath.get('arguments'), state)
+      asFunction(referencePath.parentPath.get('arguments'), state, babel)
     } else if (referencePath.parentPath.type === 'JSXOpeningElement') {
       asJSX(
         {
@@ -17,6 +17,7 @@ function prevalMacros({references, state}) {
           children: referencePath.parentPath.parentPath.get('children'),
         },
         state,
+        babel,
       )
     } else if (referencePath.parentPath.type === 'JSXClosingElement') {
       // That's okay, we already prevaled this one on its opening element.
@@ -29,34 +30,37 @@ function prevalMacros({references, state}) {
   })
 }
 
-function asTag(quasiPath, {file: {opts: {filename}}}) {
+function asTag(quasiPath, {file: {opts: {filename}}}, babel) {
   const string = quasiPath.parentPath.get('quasi').evaluate().value
   quasiPath.parentPath.replaceWith(
     getReplacement({
       string,
       filename,
+      babel,
     }),
   )
 }
 
-function asFunction(argumentsPaths, {file: {opts: {filename}}}) {
+function asFunction(argumentsPaths, {file: {opts: {filename}}}, babel) {
   const string = argumentsPaths[0].evaluate().value
   argumentsPaths[0].parentPath.replaceWith(
     getReplacement({
       string,
       filename,
+      babel,
     }),
   )
 }
 
 // eslint-disable-next-line no-unused-vars
-function asJSX({attributes, children}, {file: {opts: {filename}}}) {
+function asJSX({attributes, children}, {file: {opts: {filename}}}, babel) {
   // It's a shame you cannot use evaluate() with JSX
   const string = children[0].node.value
   children[0].replaceWith(
     getReplacement({
       string,
       filename,
+      babel,
     }),
   )
   const {parentPath: {node: {openingElement, closingElement}}} = children[0]

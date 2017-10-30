@@ -1,10 +1,9 @@
-const babel = require('babel-core')
 const requireFromString = require('require-from-string')
 const objectToAST = require('./object-to-ast')
 
 module.exports = getReplacement
 
-function getReplacement({string: stringToPreval, filename}) {
+function getReplacement({string: stringToPreval, filename, babel}) {
   const {code: transpiled} = babel.transform(stringToPreval, {
     filename,
   })
