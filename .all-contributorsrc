@@ -103,6 +103,15 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "xjlim",
+      "name": "Joe Lim",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10875678?v=4",
+      "profile": "https://joelim.me",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

@@ -12,7 +12,7 @@ Pre-evaluate code at build-time
 [![downloads][downloads-badge]][npm-stat]
 [![MIT License][license-badge]][LICENSE]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Donate][donate-badge]][donate]
 [![Code of Conduct][coc-badge]][coc]
@@ -73,6 +73,27 @@ There's also `preval.require('./something')` and
 or add `// @preval` comment at the top of a file.
 
 See more below.
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configure with Babel](#configure-with-babel)
+- [Use with [`babel-macros`][babel-macros]](#use-with-babel-macrosbabel-macros)
+- [Examples](#examples)
+- [Notes](#notes)
+- [FAQ](#faq)
+- [Inspiration](#inspiration)
+- [Related Projects](#related-projects)
+- [Other Solutions](#other-solutions)
+- [Contributors](#contributors)
+- [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## Installation
 
@@ -341,7 +362,7 @@ Thanks goes to these people ([emoji key][emojis]):
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 | [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Tests") | [<img src="https://avatars3.githubusercontent.com/u/5610087?v=3" width="100px;"/><br /><sub>Matt Phillips</sub>](http://mattphillips.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Documentation") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Tests") | [<img src="https://avatars1.githubusercontent.com/u/28024000?v=3" width="100px;"/><br /><sub>Philip Oliver</sub>](https://twitter.com/philipodev)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Aphilipodev "Bug reports") | [<img src="https://avatars2.githubusercontent.com/u/2109702?v=3" width="100px;"/><br /><sub>Sorin Davidoi</sub>](https://toot.cafe/@sorin)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Asorin-davidoi "Bug reports") [💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Tests") | [<img src="https://avatars4.githubusercontent.com/u/1127238?v=4" width="100px;"/><br /><sub>Luke Herrington</sub>](https://github.com/infiniteluke)<br />[💡](#example-infiniteluke "Examples") | [<img src="https://avatars4.githubusercontent.com/u/22868432?v=4" width="100px;"/><br /><sub>Lufty Wiranda</sub>](http://instagram.com/luftywiranda13)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=luftywiranda13 "Code") | [<img src="https://avatars0.githubusercontent.com/u/3877773?v=4" width="100px;"/><br /><sub>Oscar</sub>](http://obartra.github.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Tests") |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| [<img src="https://avatars1.githubusercontent.com/u/14310216?v=4" width="100px;"/><br /><sub>pro-nasa</sub>](https://github.com/pro-nasa)<br />[📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=pro-nasa "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/9248479?v=4" width="100px;"/><br /><sub>Sergey Bekrin</sub>](http://bekrin.me)<br /> | [<img src="https://avatars0.githubusercontent.com/u/18613301?v=4" width="100px;"/><br /><sub>Mauro Bringolf</sub>](https://maurobringolf.ch)<br /> |
+| [<img src="https://avatars1.githubusercontent.com/u/14310216?v=4" width="100px;"/><br /><sub>pro-nasa</sub>](https://github.com/pro-nasa)<br />[📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=pro-nasa "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/9248479?v=4" width="100px;"/><br /><sub>Sergey Bekrin</sub>](http://bekrin.me)<br /> | [<img src="https://avatars0.githubusercontent.com/u/18613301?v=4" width="100px;"/><br /><sub>Mauro Bringolf</sub>](https://maurobringolf.ch)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Tests") | [<img src="https://avatars1.githubusercontent.com/u/10875678?v=4" width="100px;"/><br /><sub>Joe Lim</sub>](https://joelim.me)<br /> |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.

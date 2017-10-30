@@ -5,7 +5,8 @@ const objectToAST = require('./object-to-ast')
 
 module.exports = prevalPlugin
 
-function prevalPlugin({types: t, template, transformFromAst}) {
+function prevalPlugin(babel) {
+  const {types: t, template, transformFromAst} = babel
   const assignmentBuilder = template('const NAME = VALUE')
   return {
     name: 'preval',
@@ -22,7 +23,7 @@ function prevalPlugin({types: t, template, transformFromAst}) {
         comments.find(isPrevalComment).value = ' this file was prevaled'
 
         const {code: string} = transformFromAst(path.node)
-        const replacement = getReplacement({string, filename})
+        const replacement = getReplacement({string, filename, babel})
 
         const moduleExports = Object.assign(
           {},
@@ -50,7 +51,7 @@ function prevalPlugin({types: t, template, transformFromAst}) {
         if (!string) {
           throw new Error('Unable to determine the value of your preval string')
         }
-        const replacement = getReplacement({string, filename})
+        const replacement = getReplacement({string, filename, babel})
         path.replaceWith(replacement)
       },
       ImportDeclaration(path, {file: {opts: {filename}}}) {
@@ -88,6 +89,7 @@ function prevalPlugin({types: t, template, transformFromAst}) {
             module.exports = mod
           `,
           filename,
+          babel,
         })
         path.replaceWith(
           assignmentBuilder({
