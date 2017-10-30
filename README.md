@@ -1,25 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [babel-plugin-preval](#babel-plugin-preval)
-  - [The problem](#the-problem)
-  - [This solution](#this-solution)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Configure with Babel](#configure-with-babel)
-  - [Use with [`babel-macros`][babel-macros]](#use-with-babel-macrosbabel-macros)
-  - [Examples](#examples)
-  - [Notes](#notes)
-  - [FAQ](#faq)
-  - [Inspiration](#inspiration)
-  - [Related Projects](#related-projects)
-  - [Other Solutions](#other-solutions)
-  - [Contributors](#contributors)
-  - [LICENSE](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 <div align="center">
 <h1>babel-plugin-preval</h1>
 
@@ -95,6 +73,27 @@ There's also `preval.require('./something')` and
 or add `// @preval` comment at the top of a file.
 
 See more below.
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configure with Babel](#configure-with-babel)
+- [Use with [`babel-macros`][babel-macros]](#use-with-babel-macrosbabel-macros)
+- [Examples](#examples)
+- [Notes](#notes)
+- [FAQ](#faq)
+- [Inspiration](#inspiration)
+- [Related Projects](#related-projects)
+- [Other Solutions](#other-solutions)
+- [Contributors](#contributors)
+- [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## Installation
 
