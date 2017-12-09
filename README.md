@@ -82,7 +82,7 @@ See more below.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configure with Babel](#configure-with-babel)
-- [Use with `babel-macros`](#use-with-babel-macrosbabel-macros)
+- [Use with `babel-macros`](#use-with-babel-macros)
 - [Examples](#examples)
 - [Notes](#notes)
 - [FAQ](#faq)
