@@ -79,6 +79,7 @@ See more below.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configure with Babel](#configure-with-babel)
@@ -261,7 +262,7 @@ require('babel-core').transform('code', {
 })
 ```
 
-## Use with [`babel-macros`][babel-macros]
+## Use with `babel-macros`
 
 Once you've [configured `babel-macros`](https://github.com/kentcdodds/babel-macros/blob/master/other/docs/user.md)
 you can import/require the preval macro at `babel-plugin-preval/macro`.
