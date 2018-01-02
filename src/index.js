@@ -132,8 +132,9 @@ function prevalPlugin(babel) {
         if (argValues.length) {
           if (typeof mod !== 'function') {
             throw new Error(
-              `\`preval.require\`-ed module (${source.node
-                .value}) cannot accept arguments because it does not export a function. You passed the arguments: ${argValues.join(
+              `\`preval.require\`-ed module (${
+                source.node.value
+              }) cannot accept arguments because it does not export a function. You passed the arguments: ${argValues.join(
                 ', ',
               )}`,
             )

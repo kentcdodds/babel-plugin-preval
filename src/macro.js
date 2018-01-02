@@ -1,5 +1,5 @@
 // const printAST = require('ast-pretty-print')
-const {createMacro} = require('babel-macros')
+const {createMacro} = require('babel-plugin-macros')
 const getReplacement = require('./get-replacement')
 
 module.exports = createMacro(prevalMacros)
@@ -23,8 +23,9 @@ function prevalMacros({references, state, babel}) {
       // That's okay, we already prevaled this one on its opening element.
     } else {
       throw new Error(
-        `babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried ${referencePath
-          .parentPath.type}.`,
+        `babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried ${
+          referencePath.parentPath.type
+        }.`,
       )
     }
   })

@@ -1,6 +1,6 @@
 import path from 'path'
 import pluginTester from 'babel-plugin-tester'
-import plugin from 'babel-macros'
+import plugin from 'babel-plugin-macros'
 
 const projectRoot = path.join(__dirname, '../../')
 

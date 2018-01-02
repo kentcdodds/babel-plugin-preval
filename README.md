@@ -2,6 +2,7 @@
 <h1>babel-plugin-preval</h1>
 
 Pre-evaluate code at build-time
+
 </div>
 
 <hr />
@@ -10,20 +11,18 @@ Pre-evaluate code at build-time
 [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npm-stat]
-[![MIT License][license-badge]][LICENSE]
+[![MIT License][license-badge]][license]
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Donate][donate-badge]][donate]
 [![Code of Conduct][coc-badge]][coc]
-[![Babel Macro][macros-badge]][babel-macros]
+[![Babel Macro][macros-badge]][babel-plugin-macros]
 [![Examples][examples-badge]][examples]
 
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
-
-<a href="https://app.codesponsor.io/link/PKGFLnhDiFvsUA5P4kAXfiPs/kentcdodds/babel-plugin-preval" rel="nofollow"><img src="https://app.codesponsor.io/embed/PKGFLnhDiFvsUA5P4kAXfiPs/kentcdodds/babel-plugin-preval.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
 
 ## The problem
 
@@ -37,11 +36,11 @@ This allows you to specify some code that runs in Node and whatever you
 `module.exports` in there will be swapped. For example:
 
 ```js
-const x = preval`module.exports = 1`;
+const x = preval`module.exports = 1`
 
 //      ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
 ```
 
 Or, more interestingly:
@@ -77,24 +76,32 @@ See more below.
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configure with Babel](#configure-with-babel)
-- [Use with `babel-macros`](#use-with-babel-macros)
-- [Examples](#examples)
-- [Notes](#notes)
-- [FAQ](#faq)
-- [Inspiration](#inspiration)
-- [Related Projects](#related-projects)
-- [Other Solutions](#other-solutions)
-- [Contributors](#contributors)
-- [LICENSE](#license)
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Template Tag](#template-tag)
+  * [import comment](#import-comment)
+  * [preval.require](#prevalrequire)
+  * [preval file comment (`// @preval`)](#preval-file-comment--preval)
+* [Configure with Babel](#configure-with-babel)
+  * [Via `.babelrc` (Recommended)](#via-babelrc-recommended)
+  * [Via CLI](#via-cli)
+  * [Via Node API](#via-node-api)
+* [Use with `babel-plugin-macros`](#use-with-babel-plugin-macros)
+* [Examples](#examples)
+* [Notes](#notes)
+* [FAQ](#faq)
+  * [How is this different from [prepack][prepack]?](#how-is-this-different-from-prepackprepack)
+  * [How is this different from [webpack][webpack] [loaders][webpack-loaders]?](#how-is-this-different-from-webpackwebpack-loaderswebpack-loaders)
+* [Inspiration](#inspiration)
+* [Related Projects](#related-projects)
+* [Other Solutions](#other-solutions)
+* [Contributors](#contributors)
+* [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 
 ## Installation
 
@@ -131,7 +138,7 @@ const greeting = preval`
 **After** (assuming `greeting.txt` contains the text: `"Hello world!"`):
 
 ```javascript
-const greeting = "Hello world!"
+const greeting = 'Hello world!'
 ```
 
 `preval` can also handle _some_ simple dynamic values as well:
@@ -149,8 +156,8 @@ const person = preval`
 **After** (assuming `./name-splitter` is a function that splits a name into first/last):
 
 ```javascript
-const name = 'Bob Hope';
-const person = { "first": "Bob", "last": "Hope" };
+const name = 'Bob Hope'
+const person = {first: 'Bob', last: 'Hope'}
 ```
 
 ### import comment
@@ -200,7 +207,10 @@ And you can provide _some_ simple dynamic arguments as well:
 **Before**:
 
 ```javascript
-const fileLastModifiedDate = preval.require('./get-last-modified-date', '../../some-other-file.js')
+const fileLastModifiedDate = preval.require(
+  './get-last-modified-date',
+  '../../some-other-file.js',
+)
 ```
 
 **After**:
@@ -220,8 +230,8 @@ Whereas the above usages (assignment/import/require) will only preval the scope 
 ```javascript
 // @preval
 
-const id = require("./path/identity")
-const one = require("./path/one")
+const id = require('./path/identity')
+const one = require('./path/one')
 
 const compose = (...fns) => fns.reduce((f, g) => a => f(g(a)))
 const double = a => a * 2
@@ -262,9 +272,9 @@ require('babel-core').transform('code', {
 })
 ```
 
-## Use with `babel-macros`
+## Use with `babel-plugin-macros`
 
-Once you've [configured `babel-macros`](https://github.com/kentcdodds/babel-macros/blob/master/other/docs/user.md)
+Once you've [configured `babel-plugin-macros`](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/user.md)
 you can import/require the preval macro at `babel-plugin-preval/macro`.
 For example:
 
@@ -278,37 +288,33 @@ const one = preval`module.exports = 1 + 2 - 1 - 1`
 
 ## Examples
 
-- [Mastodon](https://github.com/tootsuite/mastodon/pull/4202) saved 40kb
+* [Mastodon](https://github.com/tootsuite/mastodon/pull/4202) saved 40kb
   (gzipped) using `babel-plugin-preval`
-- [glamorous-website](https://github.com/kentcdodds/glamorous-website/pull/235)
+* [glamorous-website](https://github.com/kentcdodds/glamorous-website/pull/235)
   uses [`preval.macro`][preval.macro] to determine Algolia options based on
   `process.env.LOCALE`. It also uses [`preval.macro`][preval.macro] to load an
   `svg` file as a string, `base64` encode it, and use it as a `background-url`
   for an input element.
-- [Generate documentation for React components](https://gist.github.com/souporserious/575609dc5a5d52e167dd2236079eccc0)
-- [Serverless with webpack](https://github.com/geovanisouza92/serverless-preval) build serverless functions using webpack and Babel for development and production with preval to replace (possible sensible) content in code.
+* [Generate documentation for React components](https://gist.github.com/souporserious/575609dc5a5d52e167dd2236079eccc0)
+* [Serverless with webpack](https://github.com/geovanisouza92/serverless-preval) build serverless functions using webpack and Babel for development and production with preval to replace (possible sensible) content in code.
 
 ## Notes
 
 If you use `babel-plugin-transform-decorators-legacy`, there is a conflict because both plugins must be placed at the top
 
 Wrong:
+
 ```json
 {
-  "plugins": [
-    "preval",
-    "transform-decorators-legacy"
-  ]
+  "plugins": ["preval", "transform-decorators-legacy"]
 }
 ```
 
 Ok:
+
 ```json
 {
-  "plugins": [
-    "preval",
-    ["transform-decorators-legacy"]
-  ]
+  "plugins": ["preval", ["transform-decorators-legacy"]]
 }
 ```
 
@@ -349,7 +355,7 @@ I was inspired by the [val-loader][val-loader] from webpack.
 
 ## Related Projects
 
-- [`preval.macro`][preval.macro] - nicer integration with `babel-macros`
+* [`preval.macro`][preval.macro] - nicer integration with `babel-plugin-macros`
 
 ## Other Solutions
 
@@ -361,9 +367,12 @@ here!
 Thanks goes to these people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Tests") | [<img src="https://avatars3.githubusercontent.com/u/5610087?v=3" width="100px;"/><br /><sub>Matt Phillips</sub>](http://mattphillips.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Documentation") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Tests") | [<img src="https://avatars1.githubusercontent.com/u/28024000?v=3" width="100px;"/><br /><sub>Philip Oliver</sub>](https://twitter.com/philipodev)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Aphilipodev "Bug reports") | [<img src="https://avatars2.githubusercontent.com/u/2109702?v=3" width="100px;"/><br /><sub>Sorin Davidoi</sub>](https://toot.cafe/@sorin)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Asorin-davidoi "Bug reports") [💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Tests") | [<img src="https://avatars4.githubusercontent.com/u/1127238?v=4" width="100px;"/><br /><sub>Luke Herrington</sub>](https://github.com/infiniteluke)<br />[💡](#example-infiniteluke "Examples") | [<img src="https://avatars4.githubusercontent.com/u/22868432?v=4" width="100px;"/><br /><sub>Lufty Wiranda</sub>](http://instagram.com/luftywiranda13)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=luftywiranda13 "Code") | [<img src="https://avatars0.githubusercontent.com/u/3877773?v=4" width="100px;"/><br /><sub>Oscar</sub>](http://obartra.github.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Tests") |
+
+<!-- prettier-ignore -->
+| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub><b>Kent C. Dodds</b></sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Tests") | [<img src="https://avatars3.githubusercontent.com/u/5610087?v=3" width="100px;"/><br /><sub><b>Matt Phillips</b></sub>](http://mattphillips.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Documentation") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Tests") | [<img src="https://avatars1.githubusercontent.com/u/28024000?v=3" width="100px;"/><br /><sub><b>Philip Oliver</b></sub>](https://twitter.com/philipodev)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Aphilipodev "Bug reports") | [<img src="https://avatars2.githubusercontent.com/u/2109702?v=3" width="100px;"/><br /><sub><b>Sorin Davidoi</b></sub>](https://toot.cafe/@sorin)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Asorin-davidoi "Bug reports") [💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Tests") | [<img src="https://avatars4.githubusercontent.com/u/1127238?v=4" width="100px;"/><br /><sub><b>Luke Herrington</b></sub>](https://github.com/infiniteluke)<br />[💡](#example-infiniteluke "Examples") | [<img src="https://avatars4.githubusercontent.com/u/22868432?v=4" width="100px;"/><br /><sub><b>Lufty Wiranda</b></sub>](http://instagram.com/luftywiranda13)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=luftywiranda13 "Code") | [<img src="https://avatars0.githubusercontent.com/u/3877773?v=4" width="100px;"/><br /><sub><b>Oscar</b></sub>](http://obartra.github.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Tests") |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| [<img src="https://avatars1.githubusercontent.com/u/14310216?v=4" width="100px;"/><br /><sub>pro-nasa</sub>](https://github.com/pro-nasa)<br />[📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=pro-nasa "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/9248479?v=4" width="100px;"/><br /><sub>Sergey Bekrin</sub>](http://bekrin.me)<br /> | [<img src="https://avatars0.githubusercontent.com/u/18613301?v=4" width="100px;"/><br /><sub>Mauro Bringolf</sub>](https://maurobringolf.ch)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Tests") | [<img src="https://avatars1.githubusercontent.com/u/10875678?v=4" width="100px;"/><br /><sub>Joe Lim</sub>](https://joelim.me)<br /> |
+| [<img src="https://avatars1.githubusercontent.com/u/14310216?v=4" width="100px;"/><br /><sub><b>pro-nasa</b></sub>](https://github.com/pro-nasa)<br />[📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=pro-nasa "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/9248479?v=4" width="100px;"/><br /><sub><b>Sergey Bekrin</b></sub>](http://bekrin.me)<br /> | [<img src="https://avatars0.githubusercontent.com/u/18613301?v=4" width="100px;"/><br /><sub><b>Mauro Bringolf</b></sub>](https://maurobringolf.ch)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Tests") | [<img src="https://avatars1.githubusercontent.com/u/10875678?v=4" width="100px;"/><br /><sub><b>Joe Lim</b></sub>](https://joelim.me)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=xjlim "Code") |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.
@@ -392,7 +401,7 @@ MIT
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/other/CODE_OF_CONDUCT.md
 [macros-badge]: https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square
-[babel-macros]: https://github.com/kentcdodds/babel-macros
+[babel-plugin-macros]: https://github.com/kentcdodds/babel-plugin-macros
 [examples-badge]: https://img.shields.io/badge/%F0%9F%92%A1-examples-8C8E93.svg?style=flat-square
 [examples]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/other/EXAMPLES.md
 [github-watch-badge]: https://img.shields.io/github/watchers/kentcdodds/babel-plugin-preval.svg?style=social

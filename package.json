@@ -17,19 +17,25 @@
     "precommit": "kcd-scripts precommit"
   },
   "files": ["dist", "macro.js"],
-  "keywords": ["babel", "babel-plugin", "eval", "precompile", "babel-macros"],
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "eval",
+    "precompile",
+    "babel-plugin-macros"
+  ],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
-    "babel-macros": "^1.1.1",
+    "babel-plugin-macros": "^2.0.0",
     "babel-register": "^6.26.0",
     "babylon": "^6.18.0",
     "require-from-string": "^2.0.1"
   },
   "devDependencies": {
     "ast-pretty-print": "^2.0.1",
-    "babel-plugin-tester": "^4.0.0",
-    "kcd-scripts": "^0.27.0"
+    "babel-plugin-tester": "^5.0.0",
+    "kcd-scripts": "^0.30.4"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js"
