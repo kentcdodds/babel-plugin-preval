@@ -135,5 +135,6 @@ pluginTester({
       // @preval
       /* comment */
     `),
+    `const x = preval\`module.exports = require('./fixtures/es6.js')\``,
   ],
 })

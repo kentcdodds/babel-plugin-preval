@@ -392,3 +392,13 @@ module.exports = smth.UNDEFINED;
 module.exports = undefined;
 
 `;
+
+exports[`38. preval 1`] = `
+
+const x = preval\`module.exports = require('./fixtures/es6.js')\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = { "default": "this string used exported default" };
+
+`;
