@@ -79,7 +79,7 @@ function prevalPlugin(babel) {
           string: `
             try {
               // allow for transpilation of required modules
-              require('babel-register')
+              require('@babel/register')
             } catch (e) {
               // ignore error
             }
@@ -124,7 +124,7 @@ function prevalPlugin(babel) {
         const absolutePath = p.resolve(p.dirname(filename), source.node.value)
         try {
           // allow for transpilation of required modules
-          require('babel-register')
+          require('@babel/register')
         } catch (e) {
           // ignore error
         }
