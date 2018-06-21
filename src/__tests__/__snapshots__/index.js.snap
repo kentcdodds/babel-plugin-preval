@@ -68,7 +68,7 @@ export default preval\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-export default { "default": "/something/whatever.js" };
+export default "/something/whatever.js";
 
 `;
 
@@ -152,16 +152,6 @@ const x = 1;
 
 `;
 
-exports[`16. preval 1`] = `
-
-import x from /* preval(require("./fixtures/es6").default) */ "./fixtures/es6-identity"
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-const x = "this string used exported default";
-
-`;
-
 exports[`17. preval 1`] = `
 
 const x = preval.require("./fixtures/compute-one")
@@ -202,7 +192,7 @@ const x = preval.require("../__tests__/fixtures/nested/absolute-path")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = "<PROJECT_ROOT>/src/__tests__/fixtures/nested/absolute-path.js";
+const x = "<PROJECT_ROOT>/src/__tests__/index.js";
 
 `;
 
@@ -222,7 +212,7 @@ const x = preval.require("./fixtures/compute-one", "should not be here...")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/index.js: \`preval.require\`-ed module (./fixtures/compute-one) cannot accept arguments because it does not export a function. You passed the arguments: should not be here...
+Error: <PROJECT_ROOT>/src/__tests__/index.js: \`preval.require\`-ed module (src/__tests__/index.js) cannot accept arguments because it does not export a function. You passed the arguments: should not be here...
 
 `;
 
@@ -390,15 +380,5 @@ module.exports = smth.UNDEFINED;
 
 // this file was prevaled
 module.exports = undefined;
-
-`;
-
-exports[`38. preval 1`] = `
-
-const x = preval\`module.exports = require('./fixtures/es6.js')\`
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-const x = { "default": "this string used exported default" };
 
 `;
