@@ -126,6 +126,10 @@ Important notes:
     code string will be prevaled. Learn more about this in the
     [limitations](#limitations) section below.
 
+> You may like to watch
+> [this YouTube video](https://www.youtube.com/watch?v=1queadQ0048&list=PLV5CVI1eNcJgCrPH_e6d57KRUTiDZgs0u)
+> to get an idea of what preval is and how it can be used.
+
 ### Template Tag
 
 **Before**:
