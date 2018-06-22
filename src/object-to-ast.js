@@ -1,11 +1,14 @@
-const babylon = require('babylon')
-
 module.exports = objectToAST
 
-function objectToAST(object) {
+function objectToAST(object, {babel, fileOptions}) {
   const stringified = stringify(object)
-  const fileNode = babylon.parse(`var x = ${stringified}`)
-  return fileNode.program.body[0].declarations[0].init
+  const variableDeclarationNode = babel.template(`var x = ${stringified}`, {
+    preserveComments: true,
+    placeholderPattern: false,
+    ...fileOptions.parserOpts,
+    sourceType: 'module',
+  })()
+  return variableDeclarationNode.declarations[0].init
 }
 
 function stringify(object) {

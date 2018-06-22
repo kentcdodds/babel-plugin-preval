@@ -23,11 +23,13 @@ pluginTester({
   plugin,
   snapshot: true,
   babelOptions: {filename: __filename},
-  tests: [
-    noSnapshot('const x = notPreval`module.exports = "nothing"`;'),
-    'const x = preval`module.exports = 1`',
-    'preval`module.exports = "foo"`',
-    `
+  tests: {
+    'not preval': noSnapshot(
+      'const x = notPreval`module.exports = "nothing"`;',
+    ),
+    'simple number': 'const x = preval`module.exports = 1`',
+    'simple string': 'preval`module.exports = "foo"`',
+    'simple function': `
       const y = preval\`
         module.exports = {
           booyah: function() {
@@ -36,105 +38,72 @@ pluginTester({
         }
       \`
     `,
-    fixture('a-bunch-of-checks'),
-    fixture('transpiled'),
-    error(`const x = preval\`module.exports = "\${dynamic}"\``),
-    'import x from /* preval */ "./fixtures/compute-one.js"',
-    'import x from /* preval */ "./fixtures/compute-one.js"',
-    'import x from /* preval */ /* this is extra stuff */ "./fixtures/compute-one.js"',
-    'import x from /* this is extra stuff */ /* preval */ "./fixtures/compute-one.js"',
-    noSnapshot(
+    'a-bunch-of-checks': fixture('a-bunch-of-checks'),
+    transpiled: fixture('transpiled'),
+    'dynamic error': error(
+      `const x = preval\`module.exports = "\${dynamic}"\``,
+    ),
+    'import comment': 'import x from /* preval */ "./fixtures/compute-one.js"',
+    'import comment (with extras)':
+      'import x from /* preval */ /* this is extra stuff */ "./fixtures/compute-one.js"',
+    'import comment (with extras before)':
+      'import x from /* this is extra stuff */ /* preval */ "./fixtures/compute-one.js"',
+    'invalid comment': noSnapshot(
       'import x from /* this is extra stuff */"./fixtures/compute-one.js";',
     ),
-    'import x from /* preval("string argument") */ "./fixtures/identity.js"',
-    'import x from /* preval({object: "argument", withFunction: () => {}}) */ "./fixtures/identity.js"',
-    'import x from /* preval(require("./fixtures/compute-one")) */ "./fixtures/identity"',
-    'import x from /* preval(require("./fixtures/es6").default) */ "./fixtures/es6-identity"',
-    'const x = preval.require("./fixtures/compute-one")',
-    'const x = preval.require("./fixtures/identity", 3)',
-    'const x = preval.require("./fixtures/multiple-functions")',
-    'const x = preval.require("../__tests__/fixtures/nested/absolute-path")',
-    error(
+    'import string arg':
+      'import x from /* preval("string argument") */ "./fixtures/identity.js"',
+    'import object arg':
+      'import x from /* preval({object: "argument", withFunction: () => {}}) */ "./fixtures/identity.js"',
+    'import required arg':
+      'import x from /* preval(require("./fixtures/compute-one")) */ "./fixtures/identity"',
+    'simple require': 'const x = preval.require("./fixtures/compute-one")',
+    'require with arge': 'const x = preval.require("./fixtures/identity", 3)',
+    'require functions':
+      'const x = preval.require("./fixtures/multiple-functions")',
+    'absolute-path':
+      'const x = preval.require("../__tests__/fixtures/nested/absolute-path")',
+    'require with unknown arg': error(
       'const x = preval.require("./fixtures/identity", SOME_UNKNOWN_VARIABLE)',
     ),
-    error(
+    'require with arg but not a function': error(
       'const x = preval.require("./fixtures/compute-one", "should not be here...")',
     ),
-    `
+    'simple comment': `
       // @preval
       module.exports = 1 + 2 - 1 - 1
     `,
-    `
-      // @preval
-      const ten = 9 + 1
-      module.exports = ten * 5
-    `,
-    `
+    'with flow before': `
       // @flow
       // @preval
       module.exports = 1 + 2 - 1 - 1
     `,
-    `
+    'with flow after': `
       // @preval
       // @flow
       module.exports = 1 + 2 - 1 - 1
     `,
-    `
-      // @preval
-      const name = 'Bob Hope'
-      const splitter = str => str.split(' ')
-      module.exports = splitter(name)
-    `,
-    `
-      // @preval
-      const name = 'Bob Hope'
-      const splitter = str => str.split(' ')
-      const [first, last] = splitter(name)
-      module.exports = {first, last}
-    `,
-    `
-      // @preval
-      module.exports = require("./fixtures/compute-one")
-    `,
-    `
-      // @preval
-      module.exports = require("./fixtures/identity")('hello world')
-    `,
-    `
-      // @preval
-      const id = require("./fixtures/identity")
-      const computeOne = require("./fixtures/compute-one")
-
-      const compose = (...fns) => fns.reduce((f, g) => a => f(g(a)))
-
-      const double = a => a * 2
-      const square = a => a * a
-
-      module.exports = compose(square, id, double)(computeOne)
-    `,
-    `
-      // @preval
-      const fs = require('fs')
-      module.exports = fs.readFileSync(require.resolve('./fixtures/fixture1.md'), 'utf8')
-    `,
-    `
-      // @preval
-      function fib(x) {
-        return x <= 1 ? x : fib(x - 1) + fib(x - 2);
-      }
-      module.exports = fib(10)
-    `,
-    noSnapshot(`import x from "./fixtures/compute-one.js";`),
-    `
+    'export undefined': `
       // @preval
       let smth = {}
       module.exports = smth.UNDEFINED;
     `,
-    noSnapshot('// @preval'),
-    noSnapshot(`
+    'comment no contents': noSnapshot('// @preval'),
+    'comment with only comment contents': noSnapshot(`
       // @preval
       /* comment */
     `),
-    `const x = preval\`module.exports = require('./fixtures/es6.js')\``,
-  ],
+    'transpiles string contents': `
+      var x = preval\`
+        import one from './fixtures/compute-one'
+        export default one
+      \`
+    `,
+    'can use preval in preval': `
+      var x = preval\`
+        import message from /* preval */ './fixtures/es6'
+        export default message
+      \`
+    `,
+  },
 })

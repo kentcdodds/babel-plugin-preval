@@ -1,6 +1,6 @@
 // const printAST = require('ast-pretty-print')
 const {createMacro} = require('babel-plugin-macros')
-const getReplacement = require('./get-replacement')
+const {getReplacement} = require('./helpers')
 
 module.exports = createMacro(prevalMacros)
 
@@ -31,40 +31,44 @@ function prevalMacros({references, state, babel}) {
   })
 }
 
-function asTag(quasiPath, {file: {opts: {filename}}}, babel) {
+function asTag(quasiPath, {file: {opts: fileOpts}}, babel) {
   const string = quasiPath.parentPath.get('quasi').evaluate().value
   quasiPath.parentPath.replaceWith(
     getReplacement({
       string,
-      filename,
+      fileOpts,
       babel,
     }),
   )
 }
 
-function asFunction(argumentsPaths, {file: {opts: {filename}}}, babel) {
+function asFunction(argumentsPaths, {file: {opts: fileOpts}}, babel) {
   const string = argumentsPaths[0].evaluate().value
   argumentsPaths[0].parentPath.replaceWith(
     getReplacement({
       string,
-      filename,
+      fileOpts,
       babel,
     }),
   )
 }
 
 // eslint-disable-next-line no-unused-vars
-function asJSX({attributes, children}, {file: {opts: {filename}}}, babel) {
+function asJSX({attributes, children}, {file: {opts: fileOpts}}, babel) {
   // It's a shame you cannot use evaluate() with JSX
   const string = children[0].node.value
   children[0].replaceWith(
     getReplacement({
       string,
-      filename,
+      fileOpts,
       babel,
     }),
   )
-  const {parentPath: {node: {openingElement, closingElement}}} = children[0]
+  const {
+    parentPath: {
+      node: {openingElement, closingElement},
+    },
+  } = children[0]
   openingElement.name.name = 'div'
   closingElement.name.name = 'div'
 }

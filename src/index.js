@@ -1,7 +1,7 @@
 const p = require('path')
+const fs = require('fs')
 // const printAST = require('ast-pretty-print')
-const getReplacement = require('./get-replacement')
-const objectToAST = require('./object-to-ast')
+const {getReplacement, transformAndRequire} = require('./helpers')
 
 module.exports = prevalPlugin
 
@@ -11,7 +11,12 @@ function prevalPlugin(babel) {
   return {
     name: 'preval',
     visitor: {
-      Program(path, {file: {opts: {filename}}}) {
+      Program(
+        path,
+        {
+          file: {opts: fileOpts},
+        },
+      ) {
         const firstNode = path.node.body[0] || {}
         const comments = firstNode.leadingComments || []
         const isPreval = comments.some(isPrevalComment)
@@ -23,7 +28,7 @@ function prevalPlugin(babel) {
         comments.find(isPrevalComment).value = ' this file was prevaled'
 
         const {code: string} = transformFromAst(path.node)
-        const replacement = getReplacement({string, filename, babel})
+        const replacement = getReplacement({string, fileOpts, babel})
 
         const moduleExports = Object.assign(
           {},
@@ -42,7 +47,12 @@ function prevalPlugin(babel) {
 
         path.replaceWith(t.program([moduleExports]))
       },
-      TaggedTemplateExpression(path, {file: {opts: {filename}}}) {
+      TaggedTemplateExpression(
+        path,
+        {
+          file: {opts: fileOpts},
+        },
+      ) {
         const isPreval = path.node.tag.name === 'preval'
         if (!isPreval) {
           return
@@ -51,10 +61,15 @@ function prevalPlugin(babel) {
         if (!string) {
           throw new Error('Unable to determine the value of your preval string')
         }
-        const replacement = getReplacement({string, filename, babel})
+        const replacement = getReplacement({string, fileOpts, babel})
         path.replaceWith(replacement)
       },
-      ImportDeclaration(path, {file: {opts: {filename}}}) {
+      ImportDeclaration(
+        path,
+        {
+          file: {opts: fileOpts},
+        },
+      ) {
         const isPreval = looksLike(path, {
           node: {
             source: {
@@ -70,25 +85,27 @@ function prevalPlugin(babel) {
         const prevalComment = path.node.source.leadingComments
           .find(isPrevalComment)
           .value.trim()
-        let args
+        let argValues
         if (prevalComment !== 'preval') {
-          args = prevalComment.replace(/preval\((.*)\)/, '$1').trim()
+          const arg = prevalComment.replace(/preval\((.*)\)/, '$1').trim()
+          const argValue = transformAndRequire({
+            string: `module.exports = ${arg}`,
+            fileOpts,
+            babel,
+          })
+          argValues = [argValue]
         }
 
+        const absolutePath = p.resolve(
+          p.dirname(fileOpts.filename),
+          path.node.source.value,
+        )
+        const code = fs.readFileSync(require.resolve(absolutePath))
+
         const replacement = getReplacement({
-          string: `
-            try {
-              // allow for transpilation of required modules
-              require('babel-register')
-            } catch (e) {
-              // ignore error
-            }
-            var mod = require('${path.node.source.value}');
-            mod = mod && mod.__esModule ? mod.default : mod
-            ${args ? `mod = mod(${args})` : ''}
-            module.exports = mod
-          `,
-          filename,
+          string: code,
+          fileOpts,
+          args: argValues,
           babel,
         })
         path.replaceWith(
@@ -98,7 +115,12 @@ function prevalPlugin(babel) {
           }),
         )
       },
-      CallExpression(path, {file: {opts: {filename}}}) {
+      CallExpression(
+        path,
+        {
+          file: {opts: fileOpts},
+        },
+      ) {
         const isPreval = looksLike(path, {
           node: {
             callee: {
@@ -121,27 +143,20 @@ function prevalPlugin(babel) {
           }
           return result.value
         })
-        const absolutePath = p.resolve(p.dirname(filename), source.node.value)
-        try {
-          // allow for transpilation of required modules
-          require('babel-register')
-        } catch (e) {
-          // ignore error
-        }
-        let mod = require(absolutePath)
-        if (argValues.length) {
-          if (typeof mod !== 'function') {
-            throw new Error(
-              `\`preval.require\`-ed module (${
-                source.node.value
-              }) cannot accept arguments because it does not export a function. You passed the arguments: ${argValues.join(
-                ', ',
-              )}`,
-            )
-          }
-          mod = mod(...argValues)
-        }
-        path.replaceWith(objectToAST(mod))
+        const absolutePath = p.resolve(
+          p.dirname(fileOpts.filename),
+          source.node.value,
+        )
+        const code = fs.readFileSync(require.resolve(absolutePath))
+
+        const replacement = getReplacement({
+          string: code,
+          fileOpts,
+          args: argValues,
+          babel,
+        })
+
+        path.replaceWith(replacement)
       },
     },
   }

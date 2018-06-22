@@ -121,6 +121,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tleunen",
+      "name": "Tommy",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1972567?v=4",
+      "profile": "http://www.tommyleunen.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoType": "github"

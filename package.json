@@ -16,7 +16,10 @@
     "validate": "kcd-scripts validate",
     "precommit": "kcd-scripts precommit"
   },
-  "files": ["dist", "macro.js"],
+  "files": [
+    "dist",
+    "macro.js"
+  ],
   "keywords": [
     "babel",
     "babel-plugin",
@@ -27,20 +30,22 @@
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
-    "babel-plugin-macros": "^2.0.0",
-    "babel-register": "^6.26.0",
-    "babylon": "^6.18.0",
-    "require-from-string": "^2.0.1"
+    "babel-plugin-macros": "^2.2.2",
+    "require-from-string": "^2.0.2"
   },
   "devDependencies": {
     "ast-pretty-print": "^2.0.1",
-    "babel-plugin-tester": "^5.0.0",
-    "kcd-scripts": "^0.30.4"
+    "babel-plugin-tester": "^5.4.0",
+    "kcd-scripts": "^0.39.1"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js"
   },
-  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
   "babel": {
     "presets": "kcd-scripts/babel"
   },
