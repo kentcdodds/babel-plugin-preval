@@ -7,15 +7,16 @@ Pre-evaluate code at build-time
 
 <hr />
 
+<!-- prettier-ignore-start -->
+
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package]
-[![downloads][downloads-badge]][npm-stat]
+[![downloads][downloads-badge]][npmtrends]
 [![MIT License][license-badge]][license]
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
-[![Donate][donate-badge]][donate]
 [![Code of Conduct][coc-badge]][coc]
 [![Babel Macro][macros-badge]][babel-plugin-macros]
 [![Examples][examples-badge]][examples]
@@ -23,6 +24,8 @@ Pre-evaluate code at build-time
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
+
+<!-- prettier-ignore-end -->
 
 ## The problem
 
@@ -91,6 +94,8 @@ See more below.
 - [Use with `babel-plugin-macros`](#use-with-babel-plugin-macros)
 - [Examples](#examples)
 - [Notes](#notes)
+- [Limitations](#limitations)
+  - [Code transpilation](#code-transpilation)
 - [FAQ](#faq)
   - [How is this different from [prepack][prepack]?](#how-is-this-different-from-prepackprepack)
   - [How is this different from [webpack][webpack] [loaders][webpack-loaders]?](#how-is-this-different-from-webpackwebpack-loaderswebpack-loaders)
@@ -117,11 +122,9 @@ Important notes:
 
 1.  All code run by `preval` is _not_ run in a sandboxed environment
 2.  All code _must_ run synchronously.
-3.  All code will be transpiled via `babel-core` directly or `babel-register`
-    and should follow all of the normal rules for `.babelrc` resolution (the
-    closest `.babelrc` to the file being run is the one that's used). This means
-    you can rely on any babel plugins/transforms that you're used to using
-    elsewhere in your codebase.
+3.  The code string that preval evaluates will be transpiled, however, only that
+    code string will be prevaled. Learn more about this in the
+    [limitations](#limitations) section below.
 
 ### Template Tag
 
@@ -152,7 +155,8 @@ const person = preval`
 `
 ```
 
-**After** (assuming `./name-splitter` is a function that splits a name into first/last):
+**After** (assuming `./name-splitter` is a function that splits a name into
+first/last):
 
 ```javascript
 const name = 'Bob Hope'
@@ -167,7 +171,8 @@ const person = {first: 'Bob', last: 'Hope'}
 import fileList from /* preval */ './get-list-of-files'
 ```
 
-**After** (depending on what `./get-list-of-files does`, it might be something like):
+**After** (depending on what `./get-list-of-files does`, it might be something
+like):
 
 ```javascript
 const fileList = ['file1.md', 'file2.md', 'file3.md', 'file4.md']
@@ -181,7 +186,8 @@ You can also provide arguments which themselves are prevaled!
 import fileList from /* preval(3) */ './get-list-of-files'
 ```
 
-**After** (assuming `./get-list-of-files` accepts an argument limiting how many files are retrieved:
+**After** (assuming `./get-list-of-files` accepts an argument limiting how many
+files are retrieved:
 
 ```javascript
 const fileList = ['file1.md', 'file2.md', 'file3.md']
@@ -220,9 +226,11 @@ const fileLastModifiedDate = '2017-07-04'
 
 ### preval file comment (`// @preval`)
 
-Using the preval file comment will update a whole file to be evaluated down to an export.
+Using the preval file comment will update a whole file to be evaluated down to
+an export.
 
-Whereas the above usages (assignment/import/require) will only preval the scope of the assignment or file being imported.
+Whereas the above usages (assignment/import/require) will only preval the scope
+of the assignment or file being imported.
 
 **Before**:
 
@@ -277,9 +285,10 @@ require('babel-core').transform('code', {
 
 ## Use with `babel-plugin-macros`
 
-Once you've [configured `babel-plugin-macros`](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/user.md)
-you can import/require the preval macro at `babel-plugin-preval/macro`.
-For example:
+Once you've
+[configured `babel-plugin-macros`](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/user.md)
+you can import/require the preval macro at `babel-plugin-preval/macro`. For
+example:
 
 ```javascript
 import preval from 'babel-plugin-preval/macro'
@@ -287,7 +296,8 @@ import preval from 'babel-plugin-preval/macro'
 const one = preval`module.exports = 1 + 2 - 1 - 1`
 ```
 
-> You could also use [`preval.macro`][preval.macro] if you'd prefer to type less 😀
+> You could also use [`preval.macro`][preval.macro] if you'd prefer to type less
+> 😀
 
 ## Examples
 
@@ -299,12 +309,15 @@ const one = preval`module.exports = 1 + 2 - 1 - 1`
   `svg` file as a string, `base64` encode it, and use it as a `background-url`
   for an input element.
 - [Generate documentation for React components](https://gist.github.com/souporserious/575609dc5a5d52e167dd2236079eccc0)
-- [Serverless with webpack](https://github.com/geovanisouza92/serverless-preval) build serverless functions using webpack and Babel for development and production with preval to replace (possible sensible) content in code.
+- [Serverless with webpack](https://github.com/geovanisouza92/serverless-preval)
+  build serverless functions using webpack and Babel for development and
+  production with preval to replace (possible sensible) content in code.
 - [Read files at build time (video)](https://www.youtube.com/watch?v=NhmrbpVKgdQ&feature=youtu.be)
 
 ## Notes
 
-If you use `babel-plugin-transform-decorators-legacy`, there is a conflict because both plugins must be placed at the top
+If you use `babel-plugin-transform-decorators-legacy`, there is a conflict
+because both plugins must be placed at the top
 
 Wrong:
 
@@ -322,18 +335,81 @@ Ok:
 }
 ```
 
+## Limitations
+
+### Code transpilation
+
+It's recommended that code you want to preval be written in a way that works in
+the version of Node that you're running. That said, some code will be
+transpiled. If you for some strange reason _really_ want to write your preval
+code in a way that requires it to be transpiled, then expand here:
+
+<details>
+<summary>Expand (beware)</summary>
+
+Here are a few examples of what will and wont be transpiled by preval:
+
+> This is assuming that you've configured babel to support ESModule syntax but
+> you're using a node version which does not support ESModules natively.
+
+```javascript
+// a.js // this file can use ESModules. Regular babel handles that.
+import value from /* preval */ './b'
+
+// b.js // this file can use ESModules. preval handles that.
+import c from './c'
+export default c
+
+// c.js // this file cannot have ESModules in it.
+// Neither preval nor babel will transpile this file's contents
+module.exports = 'c'
+```
+
+```javascript
+// this file can use ESModules
+var x = preval`
+  // this string can use ESModules
+  import b from 'b.js'
+  // however b.js and it's dependents cannot
+`
+```
+
+```javascript
+// this file can use ESModules
+// and b.js will be transpiled and evaluated
+// by preval so it can use ESModules too
+// but if b.js has dependencies then it cannot.
+var x = preval.require('./b.js')
+```
+
+It's also notable that you can use preval in preval:
+
+```javascript
+// this file can use ESModules
+var x = preval`
+  // this string can use ESModules
+  import b from /* preval */ 'b.js'
+  // b can use ESModules (but not it's dependencies).
+`
+```
+
+Again, this is admittedly pretty confusing, so it's strongly recommended that
+any files you preval are written in a way that they work in node without needing
+transpilation.
+
+</details>
+
 ## FAQ
 
 ### How is this different from [prepack][prepack]?
 
 `prepack` is intended to be run on your final bundle after you've run your
-webpack/etc magic on it. It does a TON of stuff, but the idea is that your
-code should work with or without prepack.
+webpack/etc magic on it. It does a TON of stuff, but the idea is that your code
+should work with or without prepack.
 
-`babel-plugin-preval` is intended to let you write code that would _not_
-work otherwise. Doing things like reading something from the file system
-are not possible in the browser (or with prepack), but `preval` enables you
-to do this.
+`babel-plugin-preval` is intended to let you write code that would _not_ work
+otherwise. Doing things like reading something from the file system are not
+possible in the browser (or with prepack), but `preval` enables you to do this.
 
 ### How is this different from [webpack][webpack] [loaders][webpack-loaders]?
 
@@ -350,8 +426,8 @@ In addition, you can implement pretty much any webpack loader using
 ## Inspiration
 
 I needed something like this for the
-[glamorous website](https://github.com/kentcdodds/glamorous-website).
-I live-streamed developing the whole thing. If you're interested you can find
+[glamorous website](https://github.com/kentcdodds/glamorous-website). I
+live-streamed developing the whole thing. If you're interested you can find
 [the recording on my youtube channel](https://www.youtube.com/watch?v=3vxov5xUai8&index=19&list=PLV5CVI1eNcJh5CTgArGVwANebCrAh2OUE)
 (note, screen only recording, no audio).
 
@@ -394,7 +470,7 @@ MIT
 [version-badge]: https://img.shields.io/npm/v/babel-plugin-preval.svg?style=flat-square
 [package]: https://www.npmjs.com/package/babel-plugin-preval
 [downloads-badge]: https://img.shields.io/npm/dm/babel-plugin-preval.svg?style=flat-square
-[npm-stat]: http://npm-stat.com/charts.html?package=babel-plugin-preval&from=2016-04-01
+[npmtrends]: http://www.npmtrends.com/babel-plugin-preval
 [license-badge]: https://img.shields.io/npm/l/babel-plugin-preval.svg?style=flat-square
 [license]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square

@@ -40,5 +40,5 @@ function transformAndRequire({
 
 function getReplacement({string, fileOpts, args, babel}) {
   const mod = transformAndRequire({string, fileOpts, args, babel})
-  return objectToAST(mod)
+  return objectToAST(mod, {babel, fileOptions: fileOpts})
 }

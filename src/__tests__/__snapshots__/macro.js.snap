@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`as function 1`] = `
+exports[`macros as function: as function 1`] = `
 
 const myPreval = require('../macro')
 
@@ -10,11 +10,13 @@ const x = myPreval(\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = { "sayHi": () => 'hi' };
+const x = {
+  "sayHi": () => 'hi'
+};
 
 `;
 
-exports[`as jsx 1`] = `
+exports[`macros as jsx: as jsx 1`] = `
 
 const Preval = require('../macro')
 
@@ -31,7 +33,7 @@ const ui = <div>"# fixture\\n\\nThis is some file thing...\\n"</div>;
 
 `;
 
-exports[`as tag 1`] = `
+exports[`macros as tag: as tag 1`] = `
 
 import preval from '../macro'
 
@@ -43,7 +45,7 @@ const x = 1;
 
 `;
 
-exports[`error for other nodes 1`] = `
+exports[`macros error for other nodes: error for other nodes 1`] = `
 
 const preval = require('../macro')
 
