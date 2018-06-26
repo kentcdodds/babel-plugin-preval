@@ -97,8 +97,8 @@ See more below.
 - [Limitations](#limitations)
   - [Code transpilation](#code-transpilation)
 - [FAQ](#faq)
-  - [How is this different from [prepack][prepack]?](#how-is-this-different-from-prepackprepack)
-  - [How is this different from [webpack][webpack] [loaders][webpack-loaders]?](#how-is-this-different-from-webpackwebpack-loaderswebpack-loaders)
+  - [How is this different from prepack?](#how-is-this-different-from-prepack)
+  - [How is this different from webpack loaders?](#how-is-this-different-from-webpack-loaders)
 - [Inspiration](#inspiration)
 - [Related Projects](#related-projects)
 - [Other Solutions](#other-solutions)
@@ -405,9 +405,9 @@ transpilation.
 
 ## FAQ
 
-### How is this different from [prepack][prepack]?
+### How is this different from prepack?
 
-`prepack` is intended to be run on your final bundle after you've run your
+[`prepack`][prepack] is intended to be run on your final bundle after you've run your
 webpack/etc magic on it. It does a TON of stuff, but the idea is that your code
 should work with or without prepack.
 
@@ -415,17 +415,19 @@ should work with or without prepack.
 otherwise. Doing things like reading something from the file system are not
 possible in the browser (or with prepack), but `preval` enables you to do this.
 
-### How is this different from [webpack][webpack] [loaders][webpack-loaders]?
+### How is this different from webpack loaders?
 
 This plugin was inspired by webpack's [val-loader][val-loader]. The benefit of
 using this over that loader (or any other loader) is that it integrates with
 your existing babel pipeline. This is especially useful for the server where
-you're probably not bundling your code with `webpack`, but you may be using
+you're probably not bundling your code with [`webpack`][webpack], but you may be using
 babel. (If you're not using either, configuring babel for this would be easier
 than configuring webpack for `val-loader`).
 
 In addition, you can implement pretty much any webpack loader using
 `babel-plugin-preval`.
+
+If you want to learn more, check `webpack` documentations about [`loaders`][webpack-loaders].
 
 ## Inspiration
 
