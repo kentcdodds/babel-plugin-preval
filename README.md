@@ -15,7 +15,7 @@ Pre-evaluate code at build-time
 [![downloads][downloads-badge]][npmtrends]
 [![MIT License][license-badge]][license]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 [![Babel Macro][macros-badge]][babel-plugin-macros]
@@ -97,8 +97,8 @@ See more below.
 - [Limitations](#limitations)
   - [Code transpilation](#code-transpilation)
 - [FAQ](#faq)
-  - [How is this different from [prepack][prepack]?](#how-is-this-different-from-prepackprepack)
-  - [How is this different from [webpack][webpack] [loaders][webpack-loaders]?](#how-is-this-different-from-webpackwebpack-loaderswebpack-loaders)
+  - [How is this different from prepack?](#how-is-this-different-from-prepack)
+  - [How is this different from webpack loaders?](#how-is-this-different-from-webpack-loaders)
 - [Inspiration](#inspiration)
 - [Related Projects](#related-projects)
 - [Other Solutions](#other-solutions)
@@ -405,9 +405,9 @@ transpilation.
 
 ## FAQ
 
-### How is this different from [prepack][prepack]?
+### How is this different from prepack?
 
-`prepack` is intended to be run on your final bundle after you've run your
+[`prepack`][prepack] is intended to be run on your final bundle after you've run your
 webpack/etc magic on it. It does a TON of stuff, but the idea is that your code
 should work with or without prepack.
 
@@ -415,17 +415,19 @@ should work with or without prepack.
 otherwise. Doing things like reading something from the file system are not
 possible in the browser (or with prepack), but `preval` enables you to do this.
 
-### How is this different from [webpack][webpack] [loaders][webpack-loaders]?
+### How is this different from webpack loaders?
 
 This plugin was inspired by webpack's [val-loader][val-loader]. The benefit of
 using this over that loader (or any other loader) is that it integrates with
 your existing babel pipeline. This is especially useful for the server where
-you're probably not bundling your code with `webpack`, but you may be using
+you're probably not bundling your code with [`webpack`][webpack], but you may be using
 babel. (If you're not using either, configuring babel for this would be easier
 than configuring webpack for `val-loader`).
 
 In addition, you can implement pretty much any webpack loader using
 `babel-plugin-preval`.
+
+If you want to learn more, check `webpack` documentations about [`loaders`][webpack-loaders].
 
 ## Inspiration
 
@@ -454,7 +456,7 @@ Thanks goes to these people ([emoji key][emojis]):
 <!-- prettier-ignore -->
 | [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub><b>Kent C. Dodds</b></sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=kentcdodds "Tests") | [<img src="https://avatars3.githubusercontent.com/u/5610087?v=3" width="100px;"/><br /><sub><b>Matt Phillips</b></sub>](http://mattphillips.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Code") [📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Documentation") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=mattphillips "Tests") | [<img src="https://avatars1.githubusercontent.com/u/28024000?v=3" width="100px;"/><br /><sub><b>Philip Oliver</b></sub>](https://twitter.com/philipodev)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Aphilipodev "Bug reports") | [<img src="https://avatars2.githubusercontent.com/u/2109702?v=3" width="100px;"/><br /><sub><b>Sorin Davidoi</b></sub>](https://toot.cafe/@sorin)<br />[🐛](https://github.com/kentcdodds/babel-plugin-preval/issues?q=author%3Asorin-davidoi "Bug reports") [💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=sorin-davidoi "Tests") | [<img src="https://avatars4.githubusercontent.com/u/1127238?v=4" width="100px;"/><br /><sub><b>Luke Herrington</b></sub>](https://github.com/infiniteluke)<br />[💡](#example-infiniteluke "Examples") | [<img src="https://avatars4.githubusercontent.com/u/22868432?v=4" width="100px;"/><br /><sub><b>Lufty Wiranda</b></sub>](http://instagram.com/luftywiranda13)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=luftywiranda13 "Code") | [<img src="https://avatars0.githubusercontent.com/u/3877773?v=4" width="100px;"/><br /><sub><b>Oscar</b></sub>](http://obartra.github.io)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=obartra "Tests") |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| [<img src="https://avatars1.githubusercontent.com/u/14310216?v=4" width="100px;"/><br /><sub><b>pro-nasa</b></sub>](https://github.com/pro-nasa)<br />[📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=pro-nasa "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/9248479?v=4" width="100px;"/><br /><sub><b>Sergey Bekrin</b></sub>](http://bekrin.me)<br /> | [<img src="https://avatars0.githubusercontent.com/u/18613301?v=4" width="100px;"/><br /><sub><b>Mauro Bringolf</b></sub>](https://maurobringolf.ch)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Tests") | [<img src="https://avatars1.githubusercontent.com/u/10875678?v=4" width="100px;"/><br /><sub><b>Joe Lim</b></sub>](https://joelim.me)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=xjlim "Code") | [<img src="https://avatars3.githubusercontent.com/u/13483453?v=4" width="100px;"/><br /><sub><b>Marcin Zielinski</b></sub>](https://github.com/marzelin)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=marzelin "Code") | [<img src="https://avatars3.githubusercontent.com/u/1972567?v=4" width="100px;"/><br /><sub><b>Tommy</b></sub>](http://www.tommyleunen.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=tleunen "Code") |
+| [<img src="https://avatars1.githubusercontent.com/u/14310216?v=4" width="100px;"/><br /><sub><b>pro-nasa</b></sub>](https://github.com/pro-nasa)<br />[📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=pro-nasa "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/9248479?v=4" width="100px;"/><br /><sub><b>Sergey Bekrin</b></sub>](http://bekrin.me)<br /> | [<img src="https://avatars0.githubusercontent.com/u/18613301?v=4" width="100px;"/><br /><sub><b>Mauro Bringolf</b></sub>](https://maurobringolf.ch)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Code") [⚠️](https://github.com/kentcdodds/babel-plugin-preval/commits?author=maurobringolf "Tests") | [<img src="https://avatars1.githubusercontent.com/u/10875678?v=4" width="100px;"/><br /><sub><b>Joe Lim</b></sub>](https://joelim.me)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=xjlim "Code") | [<img src="https://avatars3.githubusercontent.com/u/13483453?v=4" width="100px;"/><br /><sub><b>Marcin Zielinski</b></sub>](https://github.com/marzelin)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=marzelin "Code") | [<img src="https://avatars3.githubusercontent.com/u/1972567?v=4" width="100px;"/><br /><sub><b>Tommy</b></sub>](http://www.tommyleunen.com)<br />[💻](https://github.com/kentcdodds/babel-plugin-preval/commits?author=tleunen "Code") | [<img src="https://avatars0.githubusercontent.com/u/831308?v=4" width="100px;"/><br /><sub><b>Matheus Gonçalves da Silva</b></sub>](https://github.com/PlayMa256)<br />[📖](https://github.com/kentcdodds/babel-plugin-preval/commits?author=PlayMa256 "Documentation") |
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
