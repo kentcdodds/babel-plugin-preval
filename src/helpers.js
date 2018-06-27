@@ -1,25 +1,18 @@
 const p = require('path')
-const requireFromString = require('require-from-string')
+const requireFromStringOfCode = require('require-from-string')
 const objectToAST = require('./object-to-ast')
 
 module.exports = {
   getReplacement,
-  transformAndRequire,
+  requireFromString,
 }
 
-function transformAndRequire({
+function requireFromString({
   string: stringToPreval,
-  fileOpts,
+  fileOpts: {filename},
   args = [],
-  babel,
 }) {
-  const {filename, plugins, presets} = fileOpts
-  const {code} = babel.transform(stringToPreval, {
-    filename,
-    plugins,
-    presets,
-  })
-  let mod = requireFromString(code, filename)
+  let mod = requireFromStringOfCode(String(stringToPreval), filename)
   mod = mod && mod.__esModule ? mod.default : mod
 
   if (typeof mod === 'function') {
@@ -39,6 +32,6 @@ function transformAndRequire({
 }
 
 function getReplacement({string, fileOpts, args, babel}) {
-  const mod = transformAndRequire({string, fileOpts, args, babel})
+  const mod = requireFromString({string, fileOpts, args, babel})
   return objectToAST(mod, {babel, fileOptions: fileOpts})
 }

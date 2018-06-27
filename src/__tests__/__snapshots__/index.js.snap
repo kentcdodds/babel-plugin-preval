@@ -17,7 +17,7 @@ const x = preval\`
 
 const x = {
   "val": "# fixture\\n\\nThis is some file thing...\\n",
-  "getSplit": function getSplit(splitDelimiter) {
+  "getSplit": function (splitDelimiter) {
     return x.val.split(splitDelimiter);
   }
 };
@@ -31,19 +31,6 @@ const x = preval.require("../__tests__/fixtures/nested/absolute-path")
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = "<PROJECT_ROOT>/src/__tests__/index.js";
-
-`;
-
-exports[`preval can use preval in preval: can use preval in preval 1`] = `
-
-var x = preval\`
-  import message from /* preval */ './fixtures/es6'
-  export default message
-\`
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-var x = "this string used exported default";
 
 `;
 
@@ -67,6 +54,16 @@ module.exports = smth.UNDEFINED;
 
 // this file was prevaled
 module.exports = undefined;
+
+`;
+
+exports[`preval handles transpiled modules (uses default export): handles transpiled modules (uses default export) 1`] = `
+
+let one = preval.require('./fixtures/es6-identity.js', 1)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+let one = 1;
 
 `;
 
@@ -239,32 +236,6 @@ preval\`module.exports = "foo"\`
       ↓ ↓ ↓ ↓ ↓ ↓
 
 "foo";
-
-`;
-
-exports[`preval transpiled: transpiled 1`] = `
-
-export default preval\`
-  import path from 'path'
-  export default path.join(__dirname, 'something/whatever.js').replace(__dirname, '')
-\`
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-export default "/something/whatever.js";
-
-`;
-
-exports[`preval transpiles string contents: transpiles string contents 1`] = `
-
-var x = preval\`
-  import one from './fixtures/compute-one'
-  export default one
-\`
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-var x = 1;
 
 `;
 

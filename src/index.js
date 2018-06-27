@@ -1,7 +1,7 @@
 const p = require('path')
 const fs = require('fs')
 // const printAST = require('ast-pretty-print')
-const {getReplacement, transformAndRequire} = require('./helpers')
+const {getReplacement, requireFromString} = require('./helpers')
 
 module.exports = prevalPlugin
 
@@ -88,10 +88,9 @@ function prevalPlugin(babel) {
         let argValues
         if (prevalComment !== 'preval') {
           const arg = prevalComment.replace(/preval\((.*)\)/, '$1').trim()
-          const argValue = transformAndRequire({
+          const argValue = requireFromString({
             string: `module.exports = ${arg}`,
             fileOpts,
-            babel,
           })
           argValues = [argValue]
         }

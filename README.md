@@ -94,8 +94,6 @@ See more below.
 - [Use with `babel-plugin-macros`](#use-with-babel-plugin-macros)
 - [Examples](#examples)
 - [Notes](#notes)
-- [Limitations](#limitations)
-  - [Code transpilation](#code-transpilation)
 - [FAQ](#faq)
   - [How is this different from prepack?](#how-is-this-different-from-prepack)
   - [How is this different from webpack loaders?](#how-is-this-different-from-webpack-loaders)
@@ -122,9 +120,8 @@ Important notes:
 
 1.  All code run by `preval` is _not_ run in a sandboxed environment
 2.  All code _must_ run synchronously.
-3.  The code string that preval evaluates will be transpiled, however, only that
-    code string will be prevaled. Learn more about this in the
-    [limitations](#limitations) section below.
+3.  Code that is run by preval is not transpiled so it must run natively in the
+    version of node you're running. (cannot use es modules).
 
 > You may like to watch
 > [this YouTube video](https://www.youtube.com/watch?v=1queadQ0048&list=PLV5CVI1eNcJgCrPH_e6d57KRUTiDZgs0u)
@@ -339,77 +336,13 @@ Ok:
 }
 ```
 
-## Limitations
-
-### Code transpilation
-
-It's recommended that code you want to preval be written in a way that works in
-the version of Node that you're running. That said, some code will be
-transpiled. If you for some strange reason _really_ want to write your preval
-code in a way that requires it to be transpiled, then expand here:
-
-<details>
-<summary>Expand (beware)</summary>
-
-Here are a few examples of what will and wont be transpiled by preval:
-
-> This is assuming that you've configured babel to support ESModule syntax but
-> you're using a node version which does not support ESModules natively.
-
-```javascript
-// a.js // this file can use ESModules. Regular babel handles that.
-import value from /* preval */ './b'
-
-// b.js // this file can use ESModules. preval handles that.
-import c from './c'
-export default c
-
-// c.js // this file cannot have ESModules in it.
-// Neither preval nor babel will transpile this file's contents
-module.exports = 'c'
-```
-
-```javascript
-// this file can use ESModules
-var x = preval`
-  // this string can use ESModules
-  import b from 'b.js'
-  // however b.js and it's dependents cannot
-`
-```
-
-```javascript
-// this file can use ESModules
-// and b.js will be transpiled and evaluated
-// by preval so it can use ESModules too
-// but if b.js has dependencies then it cannot.
-var x = preval.require('./b.js')
-```
-
-It's also notable that you can use preval in preval:
-
-```javascript
-// this file can use ESModules
-var x = preval`
-  // this string can use ESModules
-  import b from /* preval */ 'b.js'
-  // b can use ESModules (but not it's dependencies).
-`
-```
-
-Again, this is admittedly pretty confusing, so it's strongly recommended that
-any files you preval are written in a way that they work in node without needing
-transpilation.
-
-</details>
-
 ## FAQ
 
 ### How is this different from prepack?
 
-[`prepack`][prepack] is intended to be run on your final bundle after you've run your
-webpack/etc magic on it. It does a TON of stuff, but the idea is that your code
-should work with or without prepack.
+[`prepack`][prepack] is intended to be run on your final bundle after you've run
+your webpack/etc magic on it. It does a TON of stuff, but the idea is that your
+code should work with or without prepack.
 
 `babel-plugin-preval` is intended to let you write code that would _not_ work
 otherwise. Doing things like reading something from the file system are not
@@ -420,14 +353,15 @@ possible in the browser (or with prepack), but `preval` enables you to do this.
 This plugin was inspired by webpack's [val-loader][val-loader]. The benefit of
 using this over that loader (or any other loader) is that it integrates with
 your existing babel pipeline. This is especially useful for the server where
-you're probably not bundling your code with [`webpack`][webpack], but you may be using
-babel. (If you're not using either, configuring babel for this would be easier
-than configuring webpack for `val-loader`).
+you're probably not bundling your code with [`webpack`][webpack], but you may be
+using babel. (If you're not using either, configuring babel for this would be
+easier than configuring webpack for `val-loader`).
 
 In addition, you can implement pretty much any webpack loader using
 `babel-plugin-preval`.
 
-If you want to learn more, check `webpack` documentations about [`loaders`][webpack-loaders].
+If you want to learn more, check `webpack` documentations about
+[`loaders`][webpack-loaders].
 
 ## Inspiration
 
