@@ -39,7 +39,6 @@ pluginTester({
       \`
     `,
     'a-bunch-of-checks': fixture('a-bunch-of-checks'),
-    transpiled: fixture('transpiled'),
     'dynamic error': error(
       `const x = preval\`module.exports = "\${dynamic}"\``,
     ),
@@ -93,17 +92,8 @@ pluginTester({
       // @preval
       /* comment */
     `),
-    'transpiles string contents': `
-      var x = preval\`
-        import one from './fixtures/compute-one'
-        export default one
-      \`
-    `,
-    'can use preval in preval': `
-      var x = preval\`
-        import message from /* preval */ './fixtures/es6'
-        export default message
-      \`
+    'handles transpiled modules (uses default export)': `
+      let one = preval.require('./fixtures/es6-identity.js', 1)
     `,
   },
 })
