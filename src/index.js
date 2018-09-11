@@ -27,10 +27,10 @@ function prevalPlugin(babel) {
 
         comments.find(isPrevalComment).value = ' this file was prevaled'
 
-        /* istanbul ignore next (babel 6 vs babel 7 check) */
         const {code: string} = transformFromAst(
           path.node,
           null,
+          /* istanbul ignore next (babel 6 vs babel 7 check) */
           /^6\./.test(babel.version)
             ? {}
             : {
