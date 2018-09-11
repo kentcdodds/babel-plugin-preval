@@ -27,7 +27,16 @@ function prevalPlugin(babel) {
 
         comments.find(isPrevalComment).value = ' this file was prevaled'
 
-        const {code: string} = transformFromAst(path.node)
+        const {code: string} = transformFromAst(
+          path.node,
+          null,
+          /^6\./.test(babel.version)
+            ? {}
+            : {
+                babelrc: false,
+                configFile: false,
+              },
+        )
         const replacement = getReplacement({string, fileOpts, babel})
 
         const moduleExports = Object.assign(
