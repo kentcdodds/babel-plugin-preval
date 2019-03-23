@@ -36,7 +36,8 @@
   "devDependencies": {
     "ast-pretty-print": "^2.0.1",
     "babel-plugin-tester": "^5.4.0",
-    "kcd-scripts": "^0.39.1"
+    "kcd-scripts": "^0.39.1",
+    "typescript": "^3.3.4000"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js"
