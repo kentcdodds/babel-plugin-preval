@@ -47,9 +47,17 @@ pluginTester({
       'import x from /* preval */ /* this is extra stuff */ "./fixtures/compute-one.js"',
     'import comment (with extras before)':
       'import x from /* this is extra stuff */ /* preval */ "./fixtures/compute-one.js"',
-    'invalid comment': noSnapshot(
-      'import x from /* this is extra stuff */"./fixtures/compute-one.js";',
-    ),
+    'invalid comment': {
+      // no real changes here, but babel does weird stuff to comments like this...
+      code:
+        'import x from /* this is extra stuff */"./fixtures/compute-one.js";',
+      output: `
+          import x from
+        /* this is extra stuff */
+        "./fixtures/compute-one.js";
+      `,
+      snapshot: false,
+    },
     'import string arg':
       'import x from /* preval("string argument") */ "./fixtures/identity.js"',
     'import object arg':
@@ -90,6 +98,7 @@ pluginTester({
     'comment no contents': noSnapshot('// @preval'),
     'comment with only comment contents': noSnapshot(`
       // @preval
+
       /* comment */
     `),
     'handles transpiled modules (uses default export)': `

@@ -11,12 +11,7 @@ function prevalPlugin(babel) {
   return {
     name: 'preval',
     visitor: {
-      Program(
-        path,
-        {
-          file: {opts: fileOpts},
-        },
-      ) {
+      Program(path, {file: {opts: fileOpts}}) {
         const firstNode = path.node.body[0] || {}
         const comments = firstNode.leadingComments || []
         const isPreval = comments.some(isPrevalComment)
@@ -40,9 +35,8 @@ function prevalPlugin(babel) {
         )
         const replacement = getReplacement({string, fileOpts, babel})
 
-        const moduleExports = Object.assign(
-          {},
-          t.expressionStatement(
+        const moduleExports = {
+          ...t.expressionStatement(
             t.assignmentExpression(
               '=',
               t.memberExpression(
@@ -52,17 +46,12 @@ function prevalPlugin(babel) {
               replacement,
             ),
           ),
-          {leadingComments: comments},
-        )
+          leadingComments: comments,
+        }
 
         path.replaceWith(t.program([moduleExports]))
       },
-      TaggedTemplateExpression(
-        path,
-        {
-          file: {opts: fileOpts},
-        },
-      ) {
+      TaggedTemplateExpression(path, {file: {opts: fileOpts}}) {
         const isPreval = path.node.tag.name === 'preval'
         if (!isPreval) {
           return
@@ -74,12 +63,7 @@ function prevalPlugin(babel) {
         const replacement = getReplacement({string, fileOpts, babel})
         path.replaceWith(replacement)
       },
-      ImportDeclaration(
-        path,
-        {
-          file: {opts: fileOpts},
-        },
-      ) {
+      ImportDeclaration(path, {file: {opts: fileOpts}}) {
         const isPreval = looksLike(path, {
           node: {
             source: {
@@ -124,12 +108,7 @@ function prevalPlugin(babel) {
           }),
         )
       },
-      CallExpression(
-        path,
-        {
-          file: {opts: fileOpts},
-        },
-      ) {
+      CallExpression(path, {file: {opts: fileOpts}}) {
         const isPreval = looksLike(path, {
           node: {
             callee: {
@@ -204,6 +183,7 @@ function isPrimitive(val) {
 
 /*
 eslint
-  import/no-unassigned-import:0
-  import/no-dynamic-require:0
+  import/no-unassigned-import: off,
+  import/no-dynamic-require: off,
+  max-lines-per-function: off,
 */

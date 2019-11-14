@@ -3,18 +3,21 @@
   "version": "0.0.0-semantically-released",
   "description": "Pre-evaluate code at build-time",
   "engines": {
-    "node": ">=4",
-    "npm": ">=3"
+    "node": ">=8",
+    "npm": ">=6"
   },
   "main": "dist/index.js",
   "scripts": {
-    "add-contributor": "kcd-scripts contributors add",
     "build": "kcd-scripts build",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "test:update": "npm test -- --updateSnapshot --coverage",
-    "validate": "kcd-scripts validate",
-    "precommit": "kcd-scripts precommit"
+    "validate": "kcd-scripts validate"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "kcd-scripts pre-commit"
+    }
   },
   "files": [
     "dist",
@@ -30,13 +33,14 @@
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
-    "babel-plugin-macros": "^2.2.2",
+    "@babel/runtime": "^7.7.2",
+    "babel-plugin-macros": "^2.6.1",
     "require-from-string": "^2.0.2"
   },
   "devDependencies": {
     "ast-pretty-print": "^2.0.1",
-    "babel-plugin-tester": "^5.4.0",
-    "kcd-scripts": "^0.39.1"
+    "babel-plugin-tester": "^7.0.3",
+    "kcd-scripts": "^1.11.0"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js"
@@ -47,7 +51,9 @@
     "dist"
   ],
   "babel": {
-    "presets": "kcd-scripts/babel"
+    "presets": [
+      "kcd-scripts/babel"
+    ]
   },
   "repository": {
     "type": "git",
