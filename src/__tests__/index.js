@@ -24,9 +24,7 @@ pluginTester({
   snapshot: true,
   babelOptions: {filename: __filename},
   tests: {
-    'not preval': noSnapshot(
-      'const x = notPreval`module.exports = "nothing"`;',
-    ),
+    'not preval': noSnapshot('const x = notPreval`module.exports = "nothing"`'),
     'simple number': 'const x = preval`module.exports = 1`',
     'simple string': 'preval`module.exports = "foo"`',
     'simple function': `
@@ -52,9 +50,8 @@ pluginTester({
       code:
         'import x from /* this is extra stuff */"./fixtures/compute-one.js";',
       output: `
-          import x from
-        /* this is extra stuff */
-        "./fixtures/compute-one.js";
+        import x from /* this is extra stuff */
+        './fixtures/compute-one.js'
       `,
       snapshot: false,
     },

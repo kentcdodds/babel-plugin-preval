@@ -34,12 +34,12 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.7.2",
-    "babel-plugin-macros": "^2.6.1",
+    "babel-plugin-macros": "^2.6.2",
     "require-from-string": "^2.0.2"
   },
   "devDependencies": {
     "ast-pretty-print": "^2.0.1",
-    "babel-plugin-tester": "^7.0.3",
+    "babel-plugin-tester": "^8.0.0",
     "kcd-scripts": "^1.11.0"
   },
   "eslintConfig": {

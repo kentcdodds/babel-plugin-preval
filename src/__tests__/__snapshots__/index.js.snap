@@ -16,11 +16,12 @@ const x = preval\`
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = {
-  "val": "# fixture\\n\\nThis is some file thing...\\n",
-  "getSplit": function (splitDelimiter) {
-    return x.val.split(splitDelimiter);
-  }
-};
+  val: '# fixture\\n\\nThis is some file thing...\\n',
+  getSplit: function(splitDelimiter) {
+    return x.val.split(splitDelimiter)
+  },
+}
+
 
 `;
 
@@ -30,7 +31,8 @@ const x = preval.require("../__tests__/fixtures/nested/absolute-path")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = "<PROJECT_ROOT>/src/__tests__/index.js";
+const x = '<PROJECT_ROOT>/src/__tests__/index.js'
+
 
 `;
 
@@ -53,7 +55,8 @@ module.exports = smth.UNDEFINED;
       ↓ ↓ ↓ ↓ ↓ ↓
 
 // this file was prevaled
-module.exports = undefined;
+module.exports = undefined
+
 
 `;
 
@@ -63,7 +66,8 @@ let one = preval.require('./fixtures/es6-identity.js', 1)
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-let one = 1;
+let one = 1
+
 
 `;
 
@@ -73,7 +77,8 @@ import x from /* this is extra stuff */ /* preval */ "./fixtures/compute-one.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
+
 
 `;
 
@@ -83,7 +88,8 @@ import x from /* preval */ /* this is extra stuff */ "./fixtures/compute-one.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
+
 
 `;
 
@@ -93,7 +99,8 @@ import x from /* preval */ "./fixtures/compute-one.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
+
 
 `;
 
@@ -104,9 +111,10 @@ import x from /* preval({object: "argument", withFunction: () => {}}) */ "./fixt
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = {
-  "object": "argument",
-  "withFunction": () => {}
-};
+  object: 'argument',
+  withFunction: () => {},
+}
+
 
 `;
 
@@ -116,7 +124,8 @@ import x from /* preval(require("./fixtures/compute-one")) */ "./fixtures/identi
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
+
 
 `;
 
@@ -126,7 +135,8 @@ import x from /* preval("string argument") */ "./fixtures/identity.js"
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = "string argument";
+const x = 'string argument'
+
 
 `;
 
@@ -137,13 +147,14 @@ const x = preval.require("./fixtures/multiple-functions")
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = {
-  "a": function a() {
-    return 'a';
+  a: function a() {
+    return 'a'
   },
-  "b": function b() {
-    return 'b';
-  }
-};
+  b: function b() {
+    return 'b'
+  },
+}
+
 
 `;
 
@@ -163,7 +174,8 @@ const x = preval.require("./fixtures/identity", 3)
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 3;
+const x = 3
+
 
 `;
 
@@ -185,7 +197,8 @@ module.exports = 1 + 2 - 1 - 1
       ↓ ↓ ↓ ↓ ↓ ↓
 
 // this file was prevaled
-module.exports = 1;
+module.exports = 1
+
 
 `;
 
@@ -202,10 +215,11 @@ const y = preval\`
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const y = {
-  "booyah": function () {
-    return "booyah";
-  }
-};
+  booyah: function() {
+    return 'booyah'
+  },
+}
+
 
 `;
 
@@ -215,7 +229,8 @@ const x = preval\`module.exports = 1\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
+
 
 `;
 
@@ -225,7 +240,8 @@ const x = preval.require("./fixtures/compute-one")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
+
 
 `;
 
@@ -235,7 +251,8 @@ preval\`module.exports = "foo"\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-"foo";
+'foo'
+
 
 `;
 
@@ -249,7 +266,8 @@ module.exports = 1 + 2 - 1 - 1
 
 // this file was prevaled
 // @flow
-module.exports = 1;
+module.exports = 1
+
 
 `;
 
@@ -263,6 +281,7 @@ module.exports = 1 + 2 - 1 - 1
 
 // @flow
 // this file was prevaled
-module.exports = 1;
+module.exports = 1
+
 
 `;

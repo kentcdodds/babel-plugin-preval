@@ -11,8 +11,9 @@ const x = myPreval(\`
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = {
-  "sayHi": () => 'hi'
-};
+  sayHi: () => 'hi',
+}
+
 
 `;
 
@@ -29,7 +30,8 @@ const ui = (
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const ui = <div>"# fixture\\n\\nThis is some file thing...\\n"</div>;
+const ui = <div>"# fixture\\n\\nThis is some file thing...\\n"</div>
+
 
 `;
 
@@ -41,7 +43,8 @@ const x = preval\`module.exports = require('./fixtures/compute-one')\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = 1;
+const x = 1
+
 
 `;
 
