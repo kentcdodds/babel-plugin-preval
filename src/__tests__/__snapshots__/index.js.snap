@@ -31,7 +31,8 @@ const x = preval.require("../__tests__/fixtures/nested/absolute-path")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x = '<PROJECT_ROOT>/src/__tests__/index.js'
+const x =
+  '<PROJECT_ROOT>/src/__tests__/index.js'
 
 
 `;
