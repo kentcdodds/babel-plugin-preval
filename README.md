@@ -231,6 +231,30 @@ const fileLastModifiedDate = preval.require(
 const fileLastModifiedDate = '2017-07-04'
 ```
 
+
+#### preval.require to insert functions
+
+**Example function**:
+```js
+function doThing(message) { return message + ' a thing'; }
+module.exports = { doThing };
+```
+
+**Usage of preval**:
+```js
+const doThing = preval.require('./doDigest.js').doThing;
+```
+
+**Generated code**:
+```js
+var doThing = {
+  "doThing": function doThing(message) {
+    return message + ' a thing';
+  }
+}.doThing;
+```
+
+
 ### preval file comment (`// @preval`)
 
 Using the preval file comment will update a whole file to be evaluated down to
@@ -263,6 +287,12 @@ module.exports = compose(
 ```javascript
 module.exports = 4
 ```
+
+
+
+
+
+
 
 ## Configure with Babel
 
