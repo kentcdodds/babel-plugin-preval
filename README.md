@@ -237,7 +237,7 @@ const fileLastModifiedDate = '2017-07-04'
 **Example function**:
 ```js
 function doThing(message) { return message + ' a thing'; }
-module.exports = { doThing };
+module.exports = () => doThing;
 ```
 
 **Usage of preval**:
@@ -247,10 +247,8 @@ const doThing = preval.require('./doDigest.js').doThing;
 
 **Generated code**:
 ```js
-var doThing = {
-  "doThing": function doThing(message) {
-    return message + ' a thing';
-  }
+var doThing = function doThing(message) {
+  return message + ' a thing';
 }.doThing;
 ```
 
