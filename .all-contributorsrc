@@ -148,9 +148,19 @@
       "contributions": [
         "fundingFinding"
       ]
+    },
+    {
+      "login": "AndrewRot",
+      "name": "Andrew Rottier",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12818861?v=4",
+      "profile": "https://github.com/AndrewRot",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoType": "github",
   "repoHost": "https://github.com",
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
