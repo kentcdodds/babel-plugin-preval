@@ -264,6 +264,35 @@ module.exports = compose(
 module.exports = 4
 ```
 
+## Exporting a function
+
+If you export a function from a module that you're prevaling (whether using
+`preval.require` or the import comment), then that function will be called
+and whatever is returned will be the prevaled value.
+
+It's important to know this if you want to have the prevaled value itself be a
+function:
+
+**Example**:
+
+```js
+// example-module.js
+const fn = message => `The message is: ${message}`
+module.exports = () => fn
+```
+
+**Usage of preval**:
+
+```js
+const theFn = preval.require('./example-module.js')
+```
+
+**Generated code**:
+
+```js
+const theFn = message => `The message is: ${message}`
+```
+
 ## Configure with Babel
 
 ### Via `.babelrc` (Recommended)
