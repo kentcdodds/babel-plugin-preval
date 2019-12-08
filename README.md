@@ -231,28 +231,6 @@ const fileLastModifiedDate = preval.require(
 const fileLastModifiedDate = '2017-07-04'
 ```
 
-
-#### preval.require to insert functions
-
-**Example function**:
-```js
-function doThing(message) { return message + ' a thing'; }
-module.exports = () => doThing;
-```
-
-**Usage of preval**:
-```js
-const doThing = preval.require('./doDigest.js').doThing;
-```
-
-**Generated code**:
-```js
-var doThing = function doThing(message) {
-  return message + ' a thing';
-}.doThing;
-```
-
-
 ### preval file comment (`// @preval`)
 
 Using the preval file comment will update a whole file to be evaluated down to
@@ -286,11 +264,34 @@ module.exports = compose(
 module.exports = 4
 ```
 
+## Exporting a function
 
+If you export a function from a module that you're prevaling (whether using
+`preval.require` or the import comment), then that function will be called
+and whatever is returned will be the prevaled value.
 
+It's important to know this if you want to have the prevaled value itself be a
+function:
 
+**Example**:
 
+```js
+// example-module.js
+const fn = message => `The message is: ${message}`
+module.exports = () => fn
+```
 
+**Usage of preval**:
+
+```js
+const theFn = preval.require('./example-module.js')
+```
+
+**Generated code**:
+
+```js
+const theFn = message => `The message is: ${message}`
+```
 
 ## Configure with Babel
 
