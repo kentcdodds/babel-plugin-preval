@@ -1,9 +1,3 @@
-<p align="center">
-<a href="https://codefund.io/properties/492/visit-sponsor">
-<img src="https://codefund.io/properties/492/sponsor" />
-</a>
-</p>
-
 <div align="center">
 <h1>babel-plugin-preval</h1>
 
