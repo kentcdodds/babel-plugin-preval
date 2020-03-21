@@ -23,9 +23,7 @@ function prevalMacros({references, state, babel}) {
       // That's okay, we already prevaled this one on its opening element.
     } else {
       throw new Error(
-        `babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried ${
-          referencePath.parentPath.type
-        }.`,
+        `babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried ${referencePath.parentPath.type}.`,
       )
     }
   })
