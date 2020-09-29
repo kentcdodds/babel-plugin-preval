@@ -31,7 +31,7 @@ function prevalPlugin(babel) {
             : {
                 filename: fileOpts.filename,
                 plugins: fileOpts.filename.match(/\.tsx?$/)
-                  ? ["@babel/plugin-transform-typescript"]
+                  ? ["@babel/plugin-transform-typescript", "@babel/plugin-transform-modules-commonjs"]
                   : [],
                 babelrc: false,
                 configFile: false,
