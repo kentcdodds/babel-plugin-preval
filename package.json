@@ -6,7 +6,7 @@
     "node": ">=10",
     "npm": ">=6"
   },
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "kcd-scripts build",
     "lint": "kcd-scripts lint",
