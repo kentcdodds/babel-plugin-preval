@@ -11,7 +11,14 @@ function prevalPlugin(babel) {
   return {
     name: 'preval',
     visitor: {
-      Program(path, {file: {opts: fileOpts}}) {
+      Program(
+        path,
+        {
+          file: {
+            opts: {filename, prevalBabelOptions},
+          },
+        },
+      ) {
         const firstNode = path.node.body[0] || {}
         const comments = firstNode.leadingComments || []
         const isPreval = comments.some(isPrevalComment)
@@ -27,17 +34,21 @@ function prevalPlugin(babel) {
           null,
           /* istanbul ignore next (babel 6 vs babel 7 check) */
           /^6\./.test(babel.version)
-            ? {}
+            ? {
+                ...prevalBabelOptions,
+              }
             : {
-                filename: fileOpts.filename,
-                plugins: fileOpts.filename.match(/\.tsx?$/)
-                  ? ["@babel/plugin-transform-typescript", "@babel/plugin-transform-modules-commonjs"]
-                  : [],
+                filename,
                 babelrc: false,
                 configFile: false,
+                ...prevalBabelOptions,
               },
         )
-        const replacement = getReplacement({string, fileOpts, babel})
+        const replacement = getReplacement({
+          string,
+          fileOpts: {filename},
+          babel,
+        })
 
         const moduleExports = {
           ...t.expressionStatement(
@@ -55,7 +66,14 @@ function prevalPlugin(babel) {
 
         path.replaceWith(t.program([moduleExports]))
       },
-      TaggedTemplateExpression(path, {file: {opts: fileOpts}}) {
+      TaggedTemplateExpression(
+        path,
+        {
+          file: {
+            opts: {filename},
+          },
+        },
+      ) {
         const isPreval = path.node.tag.name === 'preval'
         if (!isPreval) {
           return
@@ -64,10 +82,21 @@ function prevalPlugin(babel) {
         if (!string) {
           throw new Error('Unable to determine the value of your preval string')
         }
-        const replacement = getReplacement({string, fileOpts, babel})
+        const replacement = getReplacement({
+          string,
+          fileOpts: {filename},
+          babel,
+        })
         path.replaceWith(replacement)
       },
-      ImportDeclaration(path, {file: {opts: fileOpts}}) {
+      ImportDeclaration(
+        path,
+        {
+          file: {
+            opts: {filename},
+          },
+        },
+      ) {
         const isPreval = looksLike(path, {
           node: {
             source: {
@@ -88,20 +117,20 @@ function prevalPlugin(babel) {
           const arg = prevalComment.replace(/preval\((.*)\)/, '$1').trim()
           const argValue = requireFromString({
             string: `module.exports = ${arg}`,
-            fileOpts,
+            fileOpts: {filename},
           })
           argValues = [argValue]
         }
 
         const absolutePath = p.resolve(
-          p.dirname(fileOpts.filename),
+          p.dirname(filename),
           path.node.source.value,
         )
         const code = fs.readFileSync(require.resolve(absolutePath))
 
         const replacement = getReplacement({
           string: code,
-          fileOpts,
+          fileOpts: {filename},
           args: argValues,
           babel,
         })
@@ -112,7 +141,14 @@ function prevalPlugin(babel) {
           }),
         )
       },
-      CallExpression(path, {file: {opts: fileOpts}}) {
+      CallExpression(
+        path,
+        {
+          file: {
+            opts: {filename},
+          },
+        },
+      ) {
         const isPreval = looksLike(path, {
           node: {
             callee: {
@@ -135,15 +171,12 @@ function prevalPlugin(babel) {
           }
           return result.value
         })
-        const absolutePath = p.resolve(
-          p.dirname(fileOpts.filename),
-          source.node.value,
-        )
+        const absolutePath = p.resolve(p.dirname(filename), source.node.value)
         const code = fs.readFileSync(require.resolve(absolutePath))
 
         const replacement = getReplacement({
           string: code,
-          fileOpts,
+          fileOpts: {filename},
           args: argValues,
           babel,
         })
@@ -155,10 +188,7 @@ function prevalPlugin(babel) {
 }
 
 function isPrevalComment(comment) {
-  const normalisedComment = comment.value
-    .trim()
-    .split(' ')[0]
-    .trim()
+  const normalisedComment = comment.value.trim().split(' ')[0].trim()
   return (
     normalisedComment.startsWith('preval') ||
     normalisedComment.startsWith('@preval')
