@@ -82,6 +82,7 @@ See more below.
   - [import comment](#import-comment)
   - [preval.require](#prevalrequire)
   - [preval file comment (`// @preval`)](#preval-file-comment--preval)
+    - [Configuring babel parser for preval file](#configuring-babel-parser-for-files-using-preval-file-comment)
 - [Exporting a function](#exporting-a-function)
 - [Configure with Babel](#configure-with-babel)
   - [Via `.babelrc` (Recommended)](#via-babelrc-recommended)
