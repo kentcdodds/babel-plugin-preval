@@ -31,8 +31,7 @@ const x = preval.require("../__tests__/fixtures/nested/absolute-path")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-const x =
-  '<PROJECT_ROOT>/src/__tests__/index.js'
+const x = '<PROJECT_ROOT>/src/__tests__/index.js'
 
 
 `;
@@ -94,6 +93,17 @@ const x = 1
 
 `;
 
+exports[`preval import comment with babel options: import comment with babel options 1`] = `
+
+import x from /* preval */ "./fixtures/compute-one.js"
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1
+
+
+`;
+
 exports[`preval import comment: import comment 1`] = `
 
 import x from /* preval */ "./fixtures/compute-one.js"
@@ -137,6 +147,24 @@ import x from /* preval("string argument") */ "./fixtures/identity.js"
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x = 'string argument'
+
+
+`;
+
+exports[`preval require functions with babel options: require functions with babel options 1`] = `
+
+const x = preval.require("./fixtures/multiple-functions")
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = {
+  a: function a() {
+    return 'a'
+  },
+  b: function b() {
+    return 'b'
+  },
+}
 
 
 `;
@@ -190,6 +218,19 @@ Error: <PROJECT_ROOT>/src/__tests__/index.js: preval cannot determine the value 
 
 `;
 
+exports[`preval simple comment with babel options: simple comment with babel options 1`] = `
+
+// @preval
+module.exports = 1 + 2 - 1 - 1
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// this file was prevaled
+module.exports = 1
+
+
+`;
+
 exports[`preval simple comment: simple comment 1`] = `
 
 // @preval
@@ -220,6 +261,17 @@ const y = {
     return 'booyah'
   },
 }
+
+
+`;
+
+exports[`preval simple number with babel options: simple number with babel options 1`] = `
+
+const x = preval\`module.exports = 1\`
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const x = 1
 
 
 `;
