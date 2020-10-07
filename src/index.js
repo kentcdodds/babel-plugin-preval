@@ -6,7 +6,7 @@ const {getReplacement, requireFromString} = require('./helpers')
 module.exports = prevalPlugin
 
 function prevalPlugin(babel) {
-  const {types: t, template, transformFromAst} = babel
+  const {types: t, template, transformFromAst, transform} = babel
   const assignmentBuilder = template('const NAME = VALUE')
   return {
     name: 'preval',
@@ -70,7 +70,7 @@ function prevalPlugin(babel) {
         path,
         {
           file: {
-            opts: {filename},
+            opts: {filename, prevalBabelOptions},
           },
         },
       ) {
@@ -78,12 +78,29 @@ function prevalPlugin(babel) {
         if (!isPreval) {
           return
         }
-        const string = path.get('quasi').evaluate().value
-        if (!string) {
+        const rawCode = path.get('quasi').evaluate().value
+        if (!rawCode) {
           throw new Error('Unable to determine the value of your preval string')
         }
+
+        const code = prevalBabelOptions
+          ? transform(
+              rawCode,
+              /^6\./.test(babel.version)
+                ? {
+                    ...prevalBabelOptions,
+                  }
+                : {
+                    filename,
+                    babelrc: false,
+                    configFile: false,
+                    ...prevalBabelOptions,
+                  },
+            )
+          : rawCode
+
         const replacement = getReplacement({
-          string,
+          string: code,
           fileOpts: {filename},
           babel,
         })
@@ -93,7 +110,7 @@ function prevalPlugin(babel) {
         path,
         {
           file: {
-            opts: {filename},
+            opts: {filename, prevalBabelOptions},
           },
         },
       ) {
@@ -126,7 +143,23 @@ function prevalPlugin(babel) {
           p.dirname(filename),
           path.node.source.value,
         )
-        const code = fs.readFileSync(require.resolve(absolutePath))
+        const rawCode = fs.readFileSync(require.resolve(absolutePath))
+
+        const code = prevalBabelOptions
+          ? transform(
+              rawCode,
+              /^6\./.test(babel.version)
+                ? {
+                    ...prevalBabelOptions,
+                  }
+                : {
+                    filename,
+                    babelrc: false,
+                    configFile: false,
+                    ...prevalBabelOptions,
+                  },
+            )
+          : rawCode
 
         const replacement = getReplacement({
           string: code,
@@ -145,7 +178,7 @@ function prevalPlugin(babel) {
         path,
         {
           file: {
-            opts: {filename},
+            opts: {filename, prevalBabelOptions},
           },
         },
       ) {
@@ -172,7 +205,23 @@ function prevalPlugin(babel) {
           return result.value
         })
         const absolutePath = p.resolve(p.dirname(filename), source.node.value)
-        const code = fs.readFileSync(require.resolve(absolutePath))
+        const rawCode = fs.readFileSync(require.resolve(absolutePath))
+
+        const code = prevalBabelOptions
+          ? transform(
+              rawCode,
+              /^6\./.test(babel.version)
+                ? {
+                    ...prevalBabelOptions,
+                  }
+                : {
+                    filename,
+                    babelrc: false,
+                    configFile: false,
+                    ...prevalBabelOptions,
+                  },
+            )
+          : rawCode
 
         const replacement = getReplacement({
           string: code,
@@ -188,7 +237,10 @@ function prevalPlugin(babel) {
 }
 
 function isPrevalComment(comment) {
-  const normalisedComment = comment.value.trim().split(' ')[0].trim()
+  const normalisedComment = comment.value
+    .trim()
+    .split(' ')[0]
+    .trim()
   return (
     normalisedComment.startsWith('preval') ||
     normalisedComment.startsWith('@preval')
