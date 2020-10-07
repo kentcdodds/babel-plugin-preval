@@ -103,3 +103,12 @@ pluginTester({
     `,
   },
 })
+
+pluginTester({
+  plugin,
+  snapshot: true,
+  babelOptions: {filename: __filename, prevalBabelOptions: {}},
+  tests: {
+    'simple number': 'const x = preval`module.exports = 1`',
+  },
+})
