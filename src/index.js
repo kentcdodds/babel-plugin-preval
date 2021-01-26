@@ -29,6 +29,10 @@ function prevalPlugin(babel) {
           /^6\./.test(babel.version)
             ? {}
             : {
+                filename: fileOpts.filename,
+                plugins: fileOpts.filename.match(/\.tsx?$/)
+                  ? ["@babel/plugin-transform-typescript"]
+                  : [],
                 babelrc: false,
                 configFile: false,
               },
