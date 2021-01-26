@@ -103,3 +103,21 @@ pluginTester({
     `,
   },
 })
+
+pluginTester({
+  plugin,
+  snapshot: true,
+  babelOptions: {filename: __filename},
+  pluginOptions: {prevalBabelOptions: {}},
+  tests: {
+    'simple number with babel options': 'const x = preval`module.exports = 1`',
+    'import comment with babel options':
+      'import x from /* preval */ "./fixtures/compute-one.js"',
+    'require functions with babel options':
+      'const x = preval.require("./fixtures/multiple-functions")',
+    'simple comment with babel options': `
+      // @preval
+      module.exports = 1 + 2 - 1 - 1
+    `,
+  },
+})

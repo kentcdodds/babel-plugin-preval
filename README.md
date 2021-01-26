@@ -82,6 +82,7 @@ See more below.
   - [import comment](#import-comment)
   - [preval.require](#prevalrequire)
   - [preval file comment (`// @preval`)](#preval-file-comment--preval)
+    - [Configuring babel parser for preval file](#configuring-babel-parser-for-files-using-preval-file-comment)
 - [Exporting a function](#exporting-a-function)
 - [Configure with Babel](#configure-with-babel)
   - [Via `.babelrc` (Recommended)](#via-babelrc-recommended)
@@ -252,6 +253,57 @@ module.exports = compose(square, id, double)(one)
 ```javascript
 module.exports = 4
 ```
+
+#### Configuring babel parser for files using preval file comment
+
+When using the preval file comment above, it's possible to configure the babel
+parser used to interpret this file using babel options.
+
+For example, if the `// @preval` file is written in typescript the following
+babel configuration would allow the preval plugin to successfully parse the file
+when using node version 14+.
+
+```javascript
+{
+  plugins: [
+    [
+      'preval',
+      {
+        prevalBabelOptions: {
+          plugins: [
+            '@babel/plugin-transform-typescript',
+            '@babel/plugin-transform-modules-commonjs',
+          ],
+        },
+      },
+    ],
+  ]
+}
+```
+
+This would then allow the following file to preval correctly:
+
+```ts
+// @preval
+
+import planetArray, { PlanetEnum } from "./examplePlanetList"
+import { getPlanetRadius } from "exampleGetPlanetRadiusLib"
+
+type PlanetRadiusDataType: Array<{ planet: PlanetEnum, radius: number }>
+const data: PlanetRadiusDataType = planetArray.map((planet: PlanetEnum) => {
+  return {
+    planet,
+    radius: getPlanetRadius(planet)
+  }
+})
+
+export default data
+```
+
+Note: The `prevalBabelOptions` accepts all options accepted by babel, similar to
+the `.babelrc` file.
+
+See [here](https://babeljs.io/docs/en/options) for a list of valid options.
 
 ## Exporting a function
 
@@ -459,6 +511,7 @@ Thanks goes to these people ([emoji key][emojis]):
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.
