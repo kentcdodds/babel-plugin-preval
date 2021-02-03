@@ -17,11 +17,9 @@ export default function objectToAST(
     placeholderPattern: false,
     ...fileOptions.parserOpts,
     sourceType: 'module',
-  })()
+  })() as babelCore.types.VariableDeclaration
 
-  // @ts-expect-error "field is missing in declaration, but available at runtime?"
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  return variableDeclarationNode.declarations[0].init as babelCore.Node
+  return variableDeclarationNode.declarations[0].init
 }
 
 function stringify(object: unknown) {
