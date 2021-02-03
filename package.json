@@ -30,13 +30,15 @@
   "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)",
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
-    "babel-plugin-macros": "^2.8.0",
+    "@babel/runtime": "^7.12.5",
+    "babel-plugin-macros": "^3.0.1",
     "require-from-string": "^2.0.2"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.1.12",
+    "@types/require-from-string": "^1.2.0",
     "ast-pretty-print": "^2.0.1",
-    "babel-plugin-tester": "^8.0.1",
+    "babel-plugin-tester": "^10.0.0",
     "kcd-scripts": "^7.2.0",
     "typescript": "^4.1.3"
   },
