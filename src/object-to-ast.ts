@@ -23,7 +23,9 @@ export default function objectToAST(
 function stringify(object: unknown) {
   let str = JSON.stringify(object, stringifyReplacer)
 
-  // TODO: TS says this is unnecessary... remove it?
+  // This check is necessary as `JSON.stringify` can return undefined,
+  // however the TypeScript definition for it does not include it.
+  // See https://github.com/microsoft/TypeScript/issues/18879 for details.
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (str === undefined) {
     str = 'undefined'
