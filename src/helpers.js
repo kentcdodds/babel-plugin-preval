@@ -1,6 +1,6 @@
 const p = require('path')
 const requireFromStringOfCode = require('require-from-string')
-const objectToAST = require('./object-to-ast')
+const objectToAST = require('./object-to-ast').default
 
 module.exports = {
   getReplacement,

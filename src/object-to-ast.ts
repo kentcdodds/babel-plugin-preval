@@ -1,7 +1,5 @@
 import type babelCore from '@babel/core'
 
-module.exports = objectToAST
-
 type ObjectToASTOptions = {
   babel: typeof babelCore
   fileOptions: babelCore.TransformOptions
