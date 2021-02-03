@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.12",
+    "@types/require-from-string": "^1.2.0",
     "ast-pretty-print": "^2.0.1",
     "babel-plugin-tester": "^10.0.0",
     "kcd-scripts": "^7.2.0",
