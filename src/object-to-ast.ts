@@ -17,7 +17,8 @@ export default function objectToAST(
     sourceType: 'module',
   })() as babelCore.types.VariableDeclaration
 
-  return variableDeclarationNode.declarations[0].init
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return variableDeclarationNode.declarations[0].init!
 }
 
 function stringify(object: unknown) {
