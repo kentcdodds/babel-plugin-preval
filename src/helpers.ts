@@ -20,7 +20,7 @@ const getFilename = (fileOpts: babelCore.TransformOptions): string =>
   fileOpts.filename ?? '"unknown"'
 
 type RequireFromStringOptions = {
-  string: string
+  string: string | Buffer
   fileOpts: babelCore.TransformOptions
   args?: any[]
 }
@@ -57,9 +57,9 @@ export function requireFromString({
 }
 
 type GetReplacementOptions = {
-  string: string
+  string: string | Buffer
   fileOpts: babelCore.TransformOptions
-  args?: Array<never>
+  args?: any[]
   babel: typeof babelCore
 }
 
