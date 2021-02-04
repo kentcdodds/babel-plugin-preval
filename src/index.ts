@@ -45,6 +45,9 @@ export default function prevalPlugin(
 
         const replacement = getReplacement({string, fileOpts, babel})
 
+        // istanbul ignore next because this should never happen, but TypeScript needs me to handle it
+        if (!replacement) return
+
         const moduleExports = {
           ...t.expressionStatement(
             t.assignmentExpression(
@@ -63,15 +66,18 @@ export default function prevalPlugin(
       },
       TaggedTemplateExpression(path, {file: {opts: fileOpts}}) {
         const isPreval =
-          (path.node.tag as babelCore.types.Identifier).name === 'preval'
+          path.node.tag.type === 'Identifier' && path.node.tag.name === 'preval'
         if (!isPreval) {
           return
         }
-        const string = path.get('quasi').evaluate().value as unknown
+        const string: unknown = path.get('quasi').evaluate().value
         if (typeof string !== 'string') {
           throw new Error('Unable to determine the value of your preval string')
         }
         const replacement = getReplacement({string, fileOpts, babel})
+
+        // istanbul ignore next because this should never happen, but TypeScript needs me to handle it
+        if (!replacement) return
 
         path.replaceWith(replacement)
       },
@@ -162,12 +168,13 @@ export default function prevalPlugin(
         })
 
         // istanbul ignore next because I don't know how to reproduce a situation
-        // where the filename doesn't exist, but TypeScript gets mad when I don't handle that case.
-        if (!fileOpts.filename) return
+        // where the filename doesn't exist or source.node.type is not StringLiteral,
+        // but TypeScript gets mad when I don't handle that case.
+        if (!fileOpts.filename || source.node.type !== 'StringLiteral') return
 
         const absolutePath = p.resolve(
           p.dirname(fileOpts.filename),
-          (source.node as babelCore.types.StringLiteral).value,
+          source.node.value,
         )
         const code = fs.readFileSync(require.resolve(absolutePath))
 
@@ -177,6 +184,9 @@ export default function prevalPlugin(
           args: argValues,
           babel,
         })
+
+        // istanbul ignore next because this should never happen, but TypeScript needs me to handle it
+        if (!replacement) return
 
         path.replaceWith(replacement)
       },
