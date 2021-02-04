@@ -13,11 +13,7 @@ type VisitorState = {
 export default function prevalPlugin(
   babel: typeof babelCore,
 ): babelCore.PluginObj<VisitorState> {
-  const {
-    types: t,
-    template,
-    /*transformFromAst, */ transformFromAstSync,
-  } = babel
+  const {types: t, template, transformFromAstSync} = babel
   const assignmentBuilder = template('const NAME = VALUE')
   return {
     name: 'preval',
@@ -33,12 +29,7 @@ export default function prevalPlugin(
 
         prevalComment.value = ' this file was prevaled'
 
-        // @ts-expect-error the types for this is wrong...
-        const result = transformFromAstSync(path.node, {
-          filename: fileOpts.filename,
-          plugins: fileOpts.plugins,
-          presets: fileOpts.presets,
-        })
+        const result = transformFromAstSync(path.node, undefined, fileOpts)
 
         // istanbul ignore next because this should never happen, but TypeScript needs me to handle it
         const string = result?.code ?? ''
