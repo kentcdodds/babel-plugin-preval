@@ -18,7 +18,8 @@
   },
   "files": [
     "dist",
-    "macro.js"
+    "macro.js",
+    "macro.d.ts"
   ],
   "keywords": [
     "babel",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.12",
+    "@types/babel-plugin-macros": "^2.8.4",
     "@types/require-from-string": "^1.2.0",
     "ast-pretty-print": "^2.0.1",
     "babel-plugin-tester": "^10.0.0",
@@ -49,6 +51,7 @@
   "eslintIgnore": [
     "node_modules",
     "coverage",
+    "/macro.d.ts",
     "dist"
   ],
   "babel": {
