@@ -6,7 +6,8 @@ const projectRoot = path.join(__dirname, '../../')
 
 expect.addSnapshotSerializer({
   print(val) {
-    return val.split(projectRoot).join('<PROJECT_ROOT>/')
+    const valString = val as string
+    return valString.split(projectRoot).join('<PROJECT_ROOT>/')
   },
   test(val) {
     return typeof val === 'string'
@@ -15,6 +16,7 @@ expect.addSnapshotSerializer({
 
 pluginTester({
   plugin,
+  pluginName: 'preval',
   snapshot: true,
   babelOptions: {filename: __filename, parserOpts: {plugins: ['jsx']}},
   tests: [
