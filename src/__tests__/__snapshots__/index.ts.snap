@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`unknown plugin a-bunch-of-checks: a-bunch-of-checks 1`] = `
+exports[`preval a-bunch-of-checks: a-bunch-of-checks 1`] = `
 
 const x = preval\`
   const fs = require('fs')
@@ -25,29 +25,29 @@ const x = {
 
 `;
 
-exports[`unknown plugin absolute-path: absolute-path 1`] = `
+exports[`preval absolute-path: absolute-path 1`] = `
 
 const x = preval.require("../__tests__/fixtures/nested/absolute-path")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x =
-  '<PROJECT_ROOT>/src/__tests__/index.js'
+  '<PROJECT_ROOT>/src/__tests__/index.ts'
 
 
 `;
 
-exports[`unknown plugin dynamic error: dynamic error 1`] = `
+exports[`preval dynamic error: dynamic error 1`] = `
 
 const x = preval\`module.exports = "\${dynamic}"\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/index.js: Unable to determine the value of your preval string
+Error: <PROJECT_ROOT>/src/__tests__/index.ts: Unable to determine the value of your preval string
 
 `;
 
-exports[`unknown plugin export undefined: export undefined 1`] = `
+exports[`preval export undefined: export undefined 1`] = `
 
 // @preval
 let smth = {}
@@ -61,7 +61,7 @@ module.exports = undefined
 
 `;
 
-exports[`unknown plugin handles transpiled modules (uses default export): handles transpiled modules (uses default export) 1`] = `
+exports[`preval handles transpiled modules (uses default export): handles transpiled modules (uses default export) 1`] = `
 
 let one = preval.require('./fixtures/es6-identity.js', 1)
 
@@ -72,7 +72,7 @@ let one = 1
 
 `;
 
-exports[`unknown plugin import comment (with extras before): import comment (with extras before) 1`] = `
+exports[`preval import comment (with extras before): import comment (with extras before) 1`] = `
 
 import x from /* this is extra stuff */ /* preval */ "./fixtures/compute-one.js"
 
@@ -83,7 +83,7 @@ const x = 1
 
 `;
 
-exports[`unknown plugin import comment (with extras): import comment (with extras) 1`] = `
+exports[`preval import comment (with extras): import comment (with extras) 1`] = `
 
 import x from /* preval */ /* this is extra stuff */ "./fixtures/compute-one.js"
 
@@ -94,7 +94,7 @@ const x = 1
 
 `;
 
-exports[`unknown plugin import comment: import comment 1`] = `
+exports[`preval import comment: import comment 1`] = `
 
 import x from /* preval */ "./fixtures/compute-one.js"
 
@@ -105,7 +105,7 @@ const x = 1
 
 `;
 
-exports[`unknown plugin import object arg: import object arg 1`] = `
+exports[`preval import object arg: import object arg 1`] = `
 
 import x from /* preval({object: "argument", withFunction: () => {}}) */ "./fixtures/identity.js"
 
@@ -119,7 +119,7 @@ const x = {
 
 `;
 
-exports[`unknown plugin import required arg: import required arg 1`] = `
+exports[`preval import required arg: import required arg 1`] = `
 
 import x from /* preval(require("./fixtures/compute-one")) */ "./fixtures/identity"
 
@@ -130,7 +130,7 @@ const x = 1
 
 `;
 
-exports[`unknown plugin import string arg: import string arg 1`] = `
+exports[`preval import string arg: import string arg 1`] = `
 
 import x from /* preval("string argument") */ "./fixtures/identity.js"
 
@@ -141,7 +141,7 @@ const x = 'string argument'
 
 `;
 
-exports[`unknown plugin require functions: require functions 1`] = `
+exports[`preval require functions: require functions 1`] = `
 
 const x = preval.require("./fixtures/multiple-functions")
 
@@ -159,17 +159,17 @@ const x = {
 
 `;
 
-exports[`unknown plugin require with arg but not a function: require with arg but not a function 1`] = `
+exports[`preval require with arg but not a function: require with arg but not a function 1`] = `
 
 const x = preval.require("./fixtures/compute-one", "should not be here...")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/index.js: \`preval.require\`-ed module (src/__tests__/index.js) cannot accept arguments because it does not export a function. You passed the arguments: should not be here...
+Error: <PROJECT_ROOT>/src/__tests__/index.ts: \`preval.require\`-ed module (src/__tests__/index.ts) cannot accept arguments because it does not export a function. You passed the arguments: should not be here...
 
 `;
 
-exports[`unknown plugin require with arge: require with arge 1`] = `
+exports[`preval require with arge: require with arge 1`] = `
 
 const x = preval.require("./fixtures/identity", 3)
 
@@ -180,17 +180,17 @@ const x = 3
 
 `;
 
-exports[`unknown plugin require with unknown arg: require with unknown arg 1`] = `
+exports[`preval require with unknown arg: require with unknown arg 1`] = `
 
 const x = preval.require("./fixtures/identity", SOME_UNKNOWN_VARIABLE)
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/index.js: preval cannot determine the value of an argument in preval.require
+Error: <PROJECT_ROOT>/src/__tests__/index.ts: preval cannot determine the value of an argument in preval.require
 
 `;
 
-exports[`unknown plugin simple comment: simple comment 1`] = `
+exports[`preval simple comment: simple comment 1`] = `
 
 // @preval
 module.exports = 1 + 2 - 1 - 1
@@ -203,7 +203,7 @@ module.exports = 1
 
 `;
 
-exports[`unknown plugin simple function: simple function 1`] = `
+exports[`preval simple function: simple function 1`] = `
 
 const y = preval\`
   module.exports = {
@@ -224,7 +224,7 @@ const y = {
 
 `;
 
-exports[`unknown plugin simple number: simple number 1`] = `
+exports[`preval simple number: simple number 1`] = `
 
 const x = preval\`module.exports = 1\`
 
@@ -235,7 +235,7 @@ const x = 1
 
 `;
 
-exports[`unknown plugin simple require: simple require 1`] = `
+exports[`preval simple require: simple require 1`] = `
 
 const x = preval.require("./fixtures/compute-one")
 
@@ -246,7 +246,7 @@ const x = 1
 
 `;
 
-exports[`unknown plugin simple string: simple string 1`] = `
+exports[`preval simple string: simple string 1`] = `
 
 preval\`module.exports = "foo"\`
 
@@ -257,7 +257,7 @@ preval\`module.exports = "foo"\`
 
 `;
 
-exports[`unknown plugin with flow after: with flow after 1`] = `
+exports[`preval with flow after: with flow after 1`] = `
 
 // @preval
 // @flow
@@ -272,7 +272,7 @@ module.exports = 1
 
 `;
 
-exports[`unknown plugin with flow before: with flow before 1`] = `
+exports[`preval with flow before: with flow before 1`] = `
 
 // @flow
 // @preval
