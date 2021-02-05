@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`unknown plugin as function: as function 1`] = `
+exports[`preval as function: as function 1`] = `
 
 const myPreval = require('../macro')
 
@@ -17,7 +17,7 @@ const x = {
 
 `;
 
-exports[`unknown plugin as jsx: as jsx 1`] = `
+exports[`preval as jsx: as jsx 1`] = `
 
 const Preval = require('../macro')
 
@@ -35,7 +35,7 @@ const ui = <div>"# fixture\\n\\nThis is some file thing...\\n"</div>
 
 `;
 
-exports[`unknown plugin as tag: as tag 1`] = `
+exports[`preval as tag: as tag 1`] = `
 
 import preval from '../macro'
 
@@ -48,7 +48,7 @@ const x = 1
 
 `;
 
-exports[`unknown plugin error for other nodes: error for other nodes 1`] = `
+exports[`preval error for other nodes: error for other nodes 1`] = `
 
 const preval = require('../macro')
 
@@ -56,6 +56,6 @@ x = 3 + preval
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/macro.js: ../macro: babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried BinaryExpression.
+Error: <PROJECT_ROOT>/src/__tests__/macro.ts: ../macro: babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried BinaryExpression.
 
 `;
