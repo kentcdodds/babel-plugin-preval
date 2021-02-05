@@ -1,26 +1,28 @@
 import path from 'path'
 import pluginTester from 'babel-plugin-tester'
-import plugin from '../'
+import plugin from '..'
 
 const projectRoot = path.join(__dirname, '../../')
 
 expect.addSnapshotSerializer({
   print(val) {
-    return val.split(projectRoot).join('<PROJECT_ROOT>/')
+    const valString = val as string
+    return valString.split(projectRoot).join('<PROJECT_ROOT>/')
   },
   test(val) {
     return typeof val === 'string'
   },
 })
 
-const error = code => ({code, error: true})
-const noSnapshot = code => ({code, snapshot: false})
-const fixture = filename => ({
+const error = (code: string) => ({code, error: true})
+const noSnapshot = (code: string) => ({code, snapshot: false})
+const fixture = (filename: string) => ({
   fixture: require.resolve(`./fixtures/${filename}`),
 })
 
 pluginTester({
   plugin,
+  pluginName: 'preval',
   snapshot: true,
   babelOptions: {filename: __filename},
   tests: {
