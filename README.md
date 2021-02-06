@@ -14,7 +14,7 @@
 [![MIT License][license-badge]][license]
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-18-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
@@ -455,6 +455,7 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="https://github.com/AndrewRot"><img src="https://avatars2.githubusercontent.com/u/12818861?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrew Rottier</b></sub></a><br /><a href="https://github.com/kentcdodds/babel-plugin-preval/commits?author=AndrewRot" title="Documentation">📖</a></td>
     <td align="center"><a href="https://michaeldeboey.be"><img src="https://avatars3.githubusercontent.com/u/6643991?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michaël De Boey</b></sub></a><br /><a href="https://github.com/kentcdodds/babel-plugin-preval/commits?author=MichaelDeBoey" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/nobrayner"><img src="https://avatars.githubusercontent.com/u/40751395?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Braydon Hall</b></sub></a><br /><a href="https://github.com/kentcdodds/babel-plugin-preval/commits?author=nobrayner" title="Code">💻</a></td>
+    <td align="center"><a href="https://dev.to/jacobmgevans"><img src="https://avatars.githubusercontent.com/u/27247160?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jacob M-G Evans</b></sub></a><br /><a href="https://github.com/kentcdodds/babel-plugin-preval/commits?author=JacobMGEvans" title="Code">💻</a></td>
   </tr>
 </table>
 
