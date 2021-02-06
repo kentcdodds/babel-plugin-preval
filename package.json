@@ -31,12 +31,12 @@
   "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)",
   "license": "MIT",
   "dependencies": {
+    "@types/babel__core": "^7.1.12",
     "@babel/runtime": "^7.12.5",
     "babel-plugin-macros": "^3.0.1",
     "require-from-string": "^2.0.2"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.1.12",
     "@types/babel-plugin-macros": "^2.8.4",
     "@types/require-from-string": "^1.2.0",
     "ast-pretty-print": "^2.0.1",
