@@ -6,7 +6,8 @@ const projectRoot = path.join(__dirname, '../../')
 
 expect.addSnapshotSerializer({
   print(val) {
-    return val.split(projectRoot).join('<PROJECT_ROOT>/')
+    const valString = val as string
+    return valString.split(projectRoot).join('<PROJECT_ROOT>/')
   },
   test(val) {
     return typeof val === 'string'
@@ -15,13 +16,14 @@ expect.addSnapshotSerializer({
 
 pluginTester({
   plugin,
+  pluginName: 'preval',
   snapshot: true,
   babelOptions: {filename: __filename, parserOpts: {plugins: ['jsx']}},
   tests: [
     {
       title: 'as tag',
       code: `
-        import preval from '../macro'
+        import preval from './helpers/preval.macro'
 
         const x = preval\`module.exports = require('./fixtures/compute-one')\`
       `,
@@ -29,7 +31,7 @@ pluginTester({
     {
       title: 'as function',
       code: `
-        const myPreval = require('../macro')
+        const myPreval = require('./helpers/preval.macro')
 
         const x = myPreval(\`
           module.exports = require('./fixtures/identity')({sayHi: () => 'hi'})
@@ -39,7 +41,7 @@ pluginTester({
     {
       title: 'as jsx',
       code: `
-        const Preval = require('../macro')
+        const Preval = require('./helpers/preval.macro')
 
         const ui = (
           <Preval>
@@ -53,7 +55,7 @@ pluginTester({
       title: 'error for other nodes',
       error: true,
       code: `
-        const preval = require('../macro')
+        const preval = require('./helpers/preval.macro')
 
         x = 3 + preval
       `,

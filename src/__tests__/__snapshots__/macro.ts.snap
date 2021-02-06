@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`macros as function: as function 1`] = `
+exports[`preval as function: as function 1`] = `
 
-const myPreval = require('../macro')
+const myPreval = require('./helpers/preval.macro')
 
 const x = myPreval(\`
   module.exports = require('./fixtures/identity')({sayHi: () => 'hi'})
@@ -17,9 +17,9 @@ const x = {
 
 `;
 
-exports[`macros as jsx: as jsx 1`] = `
+exports[`preval as jsx: as jsx 1`] = `
 
-const Preval = require('../macro')
+const Preval = require('./helpers/preval.macro')
 
 const ui = (
   <Preval>
@@ -35,9 +35,9 @@ const ui = <div>"# fixture\\n\\nThis is some file thing...\\n"</div>
 
 `;
 
-exports[`macros as tag: as tag 1`] = `
+exports[`preval as tag: as tag 1`] = `
 
-import preval from '../macro'
+import preval from './helpers/preval.macro'
 
 const x = preval\`module.exports = require('./fixtures/compute-one')\`
 
@@ -48,14 +48,14 @@ const x = 1
 
 `;
 
-exports[`macros error for other nodes: error for other nodes 1`] = `
+exports[`preval error for other nodes: error for other nodes 1`] = `
 
-const preval = require('../macro')
+const preval = require('./helpers/preval.macro')
 
 x = 3 + preval
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/macro.js: ../macro: babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried BinaryExpression.
+Error: <PROJECT_ROOT>/src/__tests__/macro.ts: ./helpers/preval.macro: babel-plugin-preval/macro can only be used as tagged template expression, function call or JSX element. You tried BinaryExpression.
 
 `;

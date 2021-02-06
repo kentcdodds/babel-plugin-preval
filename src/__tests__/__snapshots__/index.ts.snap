@@ -17,7 +17,7 @@ const x = preval\`
 
 const x = {
   val: '# fixture\\n\\nThis is some file thing...\\n',
-  getSplit: function(splitDelimiter) {
+  getSplit: function (splitDelimiter) {
     return x.val.split(splitDelimiter)
   },
 }
@@ -32,7 +32,7 @@ const x = preval.require("../__tests__/fixtures/nested/absolute-path")
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const x =
-  '<PROJECT_ROOT>/src/__tests__/index.js'
+  '<PROJECT_ROOT>/src/__tests__/index.ts'
 
 
 `;
@@ -43,7 +43,7 @@ const x = preval\`module.exports = "\${dynamic}"\`
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/index.js: Unable to determine the value of your preval string
+Error: <PROJECT_ROOT>/src/__tests__/index.ts: Unable to determine the value of your preval string
 
 `;
 
@@ -165,7 +165,7 @@ const x = preval.require("./fixtures/compute-one", "should not be here...")
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/index.js: \`preval.require\`-ed module (src/__tests__/index.js) cannot accept arguments because it does not export a function. You passed the arguments: should not be here...
+Error: <PROJECT_ROOT>/src/__tests__/index.ts: \`preval.require\`-ed module (src/__tests__/index.ts) cannot accept arguments because it does not export a function. You passed the arguments: should not be here...
 
 `;
 
@@ -186,7 +186,7 @@ const x = preval.require("./fixtures/identity", SOME_UNKNOWN_VARIABLE)
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-Error: <PROJECT_ROOT>/src/__tests__/index.js: preval cannot determine the value of an argument in preval.require
+Error: <PROJECT_ROOT>/src/__tests__/index.ts: preval cannot determine the value of an argument in preval.require
 
 `;
 
@@ -216,7 +216,7 @@ const y = preval\`
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const y = {
-  booyah: function() {
+  booyah: function () {
     return 'booyah'
   },
 }
