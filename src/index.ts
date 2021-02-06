@@ -30,7 +30,7 @@ export default function prevalPlugin(
         prevalComment.value = ' this file was prevaled'
 
         // @ts-expect-error the types for this is wrong...
-        const {code: string} = transformFromAst(
+        const {code: string}: {code: string} = transformFromAst(
           path.node,
           // @ts-expect-error the types for this is wrong...
           null,

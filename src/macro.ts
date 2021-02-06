@@ -54,7 +54,9 @@ function asTag(
     babel,
   })
 
+  // istanbul ignore next because this should never happen, but TypeScript needs me to handle it
   if (!replacement) return
+
   path.replaceWith(replacement)
 }
 
@@ -71,7 +73,9 @@ function asFunction(
     babel,
   })
 
+  // istanbul ignore next because this should never happen, but TypeScript needs me to handle it
   if (!replacement) return
+
   argumentsPaths[0].parentPath.replaceWith(replacement)
 }
 
@@ -92,6 +96,8 @@ function asJSX(
     fileOpts,
     babel,
   })
+
+  // istanbul ignore next because this should never happen, but TypeScript needs me to handle it
   if (!replacement) return
 
   children[0].replaceWith(replacement)
