@@ -400,6 +400,7 @@ I was inspired by the [val-loader][val-loader] from webpack.
 ## Related Projects
 
 - [`preval.macro`][preval.macro] - nicer integration with `babel-plugin-macros`
+- [`define_macro-loader`](https://github.com/MrcSnm/define_macro-loader) - Integrate preval with C-Like macros, thus, increasing preval use cases.
 
 ## Other Solutions
 
