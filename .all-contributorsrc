@@ -215,6 +215,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "MrcSnm",
+      "name": "Marcelo Silva Nascimento Mancini",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10136262?v=4",
+      "profile": "https://hipreme.itch.io/",
+      "contributions": [
+        "doc",
+        "plugin"
+      ]
     }
   ]
 }

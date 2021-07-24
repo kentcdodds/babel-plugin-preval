@@ -14,7 +14,7 @@
 [![MIT License][license-badge]][license]
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
@@ -462,6 +462,7 @@ Thanks goes to these people ([emoji key][emojis]):
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/mpeyper"><img src="https://avatars.githubusercontent.com/u/23029903?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michael Peyper</b></sub></a><br /><a href="https://github.com/kentcdodds/babel-plugin-preval/commits?author=mpeyper" title="Code">💻</a></td>
+    <td align="center"><a href="https://hipreme.itch.io/"><img src="https://avatars.githubusercontent.com/u/10136262?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marcelo Silva Nascimento Mancini</b></sub></a><br /><a href="https://github.com/kentcdodds/babel-plugin-preval/commits?author=MrcSnm" title="Documentation">📖</a> <a href="#plugin-MrcSnm" title="Plugin/utility libraries">🔌</a></td>
   </tr>
 </table>
 
