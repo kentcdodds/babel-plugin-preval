@@ -311,7 +311,7 @@ require('babel-core').transform('code', {
 ## Use with `babel-plugin-macros`
 
 Once you've
-[configured `babel-plugin-macros`](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/user.md)
+[configured `babel-plugin-macros`](https://github.com/kentcdodds/babel-plugin-macros/blob/main/other/docs/user.md)
 you can import/require the preval macro at `babel-plugin-preval/macro`. For
 example:
 
@@ -400,7 +400,8 @@ I was inspired by the [val-loader][val-loader] from webpack.
 ## Related Projects
 
 - [`preval.macro`][preval.macro] - nicer integration with `babel-plugin-macros`
-- [`define_macro-loader`](https://github.com/MrcSnm/define_macro-loader) - Integrate preval with C-Like macros, thus, increasing preval use cases.
+- [`define_macro-loader`](https://github.com/MrcSnm/define_macro-loader) -
+  Integrate preval with C-Like macros, thus, increasing preval use cases.
 
 ## Other Solutions
 
@@ -481,8 +482,8 @@ MIT
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com
 [node]: https://nodejs.org
-[build-badge]: https://img.shields.io/travis/kentcdodds/babel-plugin-preval.svg?style=flat-square
-[build]: https://travis-ci.org/kentcdodds/babel-plugin-preval
+[build-badge]: https://img.shields.io/github/workflow/status/kentcdodds/babel-plugin-preval/validate?logo=github&style=flat-square
+[build]: https://github.com/kentcdodds/babel-plugin-preval/actions?query=workflow%3Avalidate
 [coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/babel-plugin-preval.svg?style=flat-square
 [coverage]: https://codecov.io/github/kentcdodds/babel-plugin-preval
 [version-badge]: https://img.shields.io/npm/v/babel-plugin-preval.svg?style=flat-square
@@ -490,15 +491,15 @@ MIT
 [downloads-badge]: https://img.shields.io/npm/dm/babel-plugin-preval.svg?style=flat-square
 [npmtrends]: http://www.npmtrends.com/babel-plugin-preval
 [license-badge]: https://img.shields.io/npm/l/babel-plugin-preval.svg?style=flat-square
-[license]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/LICENSE
+[license]: https://github.com/kentcdodds/babel-plugin-preval/blob/main/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/other/CODE_OF_CONDUCT.md
+[coc]: https://github.com/kentcdodds/babel-plugin-preval/blob/main/other/CODE_OF_CONDUCT.md
 [macros-badge]: https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square
 [babel-plugin-macros]: https://github.com/kentcdodds/babel-plugin-macros
 [examples-badge]: https://img.shields.io/badge/%F0%9F%92%A1-examples-8C8E93.svg?style=flat-square
-[examples]: https://github.com/kentcdodds/babel-plugin-preval/blob/master/other/EXAMPLES.md
+[examples]: https://github.com/kentcdodds/babel-plugin-preval/blob/main/other/EXAMPLES.md
 [emojis]: https://github.com/all-contributors/all-contributors#emoji-key
 [all-contributors]: https://github.com/all-contributors/all-contributors
 [bugs]: https://github.com/kentcdodds/babel-plugin-preval/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+sort%3Acreated-desc+label%3Abug
