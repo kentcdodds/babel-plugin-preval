@@ -218,6 +218,7 @@ function looksLike(a: LooksLikeTarget, b: LooksLikeMatch): boolean {
 
   // istanbul ignore next because we don't have this use case
   // but if anyone copy/pastes this handy utility, they might need it!
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   if (isPrimitive(a) || typeof a === 'function') return false
 
   return Object.keys(b).every(bKey => {
@@ -227,7 +228,7 @@ function looksLike(a: LooksLikeTarget, b: LooksLikeMatch): boolean {
 }
 
 function isPrimitive(
-  val: Primitive | {[key: string]: unknown} | Function,
+  val: Function | Primitive | {[key: string]: unknown},
 ): val is Primitive {
   // eslint-disable-next-line
   return val == null || /^[sbn]/.test(typeof val)
