@@ -20,7 +20,7 @@ const getFilename = (fileOpts: babelCore.TransformOptions): string =>
   fileOpts.filename ?? '"unknown"'
 
 type RequireFromStringOptions = {
-  string: string | Buffer
+  string: Buffer | string
   fileOpts: babelCore.TransformOptions
   args?: any[]
 }
@@ -41,6 +41,7 @@ export function requireFromString({
   }
 
   if (typeof module === 'function') {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     module = module(...args)
   } else if (args.length) {
     throw new Error(
@@ -57,7 +58,7 @@ export function requireFromString({
 }
 
 type GetReplacementOptions = {
-  string: string | Buffer
+  string: Buffer | string
   fileOpts: babelCore.TransformOptions
   args?: any[]
   babel: typeof babelCore
